@@ -166,8 +166,6 @@ function ClimateChange() {
             this.mapYearToWidth(current.year),
             this.layout.bottomMargin - this.layout.topMargin
         );
-        console.log(this.mapTemperatureToColour(current.temperature));
-        // rect( ??? );
 
         // Draw line segment connecting previous year to current
         // year temperature.
