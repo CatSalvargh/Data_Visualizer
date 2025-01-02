@@ -7,6 +7,7 @@ function preload(){
 }
 
 function setup() {
+	console.log(typeof(studentData));
 	createCanvas(800, 800);
 	myScatter = new Scatter(10, 10, 700, 700);
 	var firstStudent = studentData.getRow(0);

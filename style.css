@@ -1,5 +1,10 @@
 body{
-    font-family: sans-serif
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 20px;
+    font-family: sans-serif;
+    flex-wrap: nowrap;
 }
 
 .menu-item {
@@ -10,14 +15,90 @@ body{
     padding: 5px;
 }
 
-.container {
-  display: flex;
+.dash-container {
+    display: flex;
+    height: 80vh;
+    justify-content: space-evenly;
+    border: 1px dotted yellowgreen;
+    padding-top: 15px
+}
+
+.map-container {
+    display: inline-flex;
+    flex: 1 0 auto;
+    width: 45vw;
+    padding: 40px 0 0 30px
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 38vw;
+}
+.extra-vis-container {
+    background: rgb(230, 220, 250);
+    width: 98%;
+    height: 45%
+}
+
+.canvas-container{
+    flex: 1 0 auto;
+    height: 45%;
+    padding-top: 20px;
 }
 
 .hover {
-    background: lightgray
+    background: lightgray;
 }
 
 .selected{
-    background: gold
+    background: gold;
+}
+
+#visuals-menu {
+    display: flex;
+}
+
+/* SVG Map*/
+svg {
+    /* background: lightblue; */
+    width: 98%;
+}
+
+svg path {
+    stroke: darkgoldenrod;
+    stroke-width: 1px;
+    cursor: pointer;
+}
+
+.showName {
+    display: block;
+    position: absolute;
+    font-size: 20px;
+    width: 200px;
+    height: 30px;
+    border: 2px, solid, blue;
+    box-sizing: border-box;
+    transition: 0.1s;
+    transform: translate(-50%, -50%);
+    background: rgba(150, 120, 200, 0.9);
+    text-align: center;
+
+    cursor: pointer;
+    color: blue;
+}
+
+.mouse-in {
+    fill: steelblue;
+    opacity: 1;
+    width: 400px;
+}
+
+#labelData {
+    display: block;
+    position: absolute;
+    width: 400;
+    height: 250;
+    background: red;
 }

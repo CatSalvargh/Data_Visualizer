@@ -1,13 +1,13 @@
-function PayGapTimeSeries() {
+function WorldPopHistoric() {
 
-  this.name = 'Pay gap: 1997-2017';
-  this.id = 'pay-gap-timeseries';
+  this.name = 'World Population 1950 to 2023';
+  this.id = 'Global_world_Population_historic';
   this.loaded = false;
 
-  this.title = 'Gender Pay Gap: Average difference between male and female pay.'; // Title above the plot.
+  this.title = 'World Population 1950 to 2023'; // Title above the plot.
 
-  this.xAxisLabel = 'year';
-  this.yAxisLabel = '%';
+  this.xAxisLabel = 'Year';
+  this.yAxisLabel = 'Billions';
 
   var marginSize = 35;
 
@@ -16,7 +16,7 @@ function PayGapTimeSeries() {
       marginSize: marginSize,
 
       // Margins around the plot. Left/bottom ++space for axis and tick labels
-      leftMargin: marginSize * 2,
+      leftMargin: marginSize * 3,
       rightMargin: width - marginSize,
       topMargin: marginSize,
       bottomMargin: height - marginSize * 2,
@@ -33,14 +33,14 @@ function PayGapTimeSeries() {
       grid: true, // Boolean to enable/disable background grid.
 
       // Number of axis tick labels to draw so that they are not drawn on top of one another.
-      numXTickLabels: 10,
+      numXTickLabels: 15,
       numYTickLabels: 8,
   };
 
   this.preload = function() {
     var self = this;
     this.data = loadTable(
-      './data/pay-gap/all-employees-hourly-pay-by-gender-1997-2017.csv', 'csv', 'header',
+      '/data/world-population/population-historic-global-continents.csv', 'csv', 'header',
       function(table) {
         self.loaded = true;
       });  // Callback function: loaded to true.
@@ -48,15 +48,15 @@ function PayGapTimeSeries() {
   };
 
   this.setup = function() {
-    textSize(16);
-
+    textSize(12);
     // Set min and max years: assumes data is sorted by date.
     this.startYear = this.data.getNum(0, 'year');
     this.endYear = this.data.getNum(this.data.getRowCount() - 1, 'year');
+    console.log(this.endYear);
 
     // Find min and max pay gap for mapping to canvas height.
-    this.minPayGap = 0;         // Pay equality (zero pay gap).
-    this.maxPayGap = max(this.data.getColumn('pay_gap'));
+    this.minPopulation = 0;   // Pay equality (zero pay gap).
+    this.maxPopulation = max(this.data.getColumn('population'));
   };
 
   this.destroy = function() {
@@ -71,10 +71,10 @@ function PayGapTimeSeries() {
     this.drawTitle(); // Draw the title above the plot.
 
     // Draw all y-axis labels. helper func
-    drawYAxisTickLabels(this.minPayGap,
-                        this.maxPayGap,
+    drawYAxisTickLabels(this.minPopulation,
+                        this.maxPopulation,
                         this.layout,
-                        this.mapPayGapToHeight.bind(this),
+                        this.mapPopulationToHeight.bind(this),
                         0);
 
     // Draw x and y axis. helper func
@@ -95,25 +95,31 @@ function PayGapTimeSeries() {
 
       // Create an object to store data for the current year.
       var current = {
-        year: this.data.getNum(i, 0),
-        payGap: this.data.getNum(i, 3)
+        year: this.data.getNum(i, 'year'),
+        Population: this.data.getNum(i, 'population')
       };
 
       if (previous != null) {
         // Draw line segment connecting previous year to current
-        stroke(0);
+        stroke(255,0,0);
+        strokeWeight(3)
         line(
-          this.mapYearToWidth(previous.year), this.mapPayGapToHeight(previous.payGap),
-          this.mapYearToWidth(current.year), this.mapPayGapToHeight(current.payGap)
+          this.mapYearToWidth(previous.year), this.mapPopulationToHeight(previous.Population),
+          this.mapYearToWidth(current.year), this.mapPopulationToHeight(current.Population)
         );
 
+        
+        
+        
         // The number of x-axis labels to skip so that only numXTickLabels are drawn.
-        var xLabelSkip = ceil(numYears / this.layout.numXTickLabels);
+        var xLabelSkip = ceil(int(numYears / this.layout.numXTickLabels));
 
         // Draw the tick label marking the start of the previous year.
         if (i % xLabelSkip == 0) {
+          strokeWeight(1)
           drawXAxisTickLabel(previous.year, this.layout,
                              this.mapYearToWidth.bind(this));
+          ellipse(this.mapYearToWidth(previous.year), this.mapPopulationToHeight(previous.Population), 7, 7);
         }
       }
 
@@ -142,10 +148,10 @@ function PayGapTimeSeries() {
                this.layout.rightMargin);
   };
 
-  this.mapPayGapToHeight = function(value) {
+  this.mapPopulationToHeight = function(value) {
     return map(value, 
-      this.minPayGap,
-      this.maxPayGap,
+      this.minPopulation,
+      this.maxPopulation,
       this.layout.bottomMargin,
       this.layout.topMargin
     )

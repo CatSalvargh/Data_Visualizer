@@ -6,8 +6,11 @@ var gallery;
 function setup() {
   // Create a canvas to fill the content div from index.html.
   canvasContainner = select('#app');
-  var c = createCanvas(1024, 576);
+  var c = createCanvas(820, 450);
   c.parent('app');
+  canvasContainner = select('.extra-vis-container');
+  nav = select('#visuals-menu')
+  nav.parent('#main-nav')
 
   // Create a new gallery object.
   gallery = new Gallery();
@@ -18,13 +21,12 @@ function setup() {
   gallery.addVisual(new PayGapByJob2017());
   gallery.addVisual(new PayGapTimeSeries());
   gallery.addVisual(new ClimateChange());
+  gallery.addVisual(new WorldPopHistoric());
 }
 
 function draw() {
-  background(255);
+  background(240);
   if (gallery.selectedVisual != null) {
     gallery.selectedVisual.draw();
   }
-
-  
 }
