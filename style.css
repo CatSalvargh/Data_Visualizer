@@ -102,3 +102,78 @@ svg path {
     height: 250;
     background: red;
 }
+
+/* Bar Chart */
+.wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    padding: 82px 36px 0 15px;
+    animation: move 1s linear infinite;
+}
+
+.entities {
+    width: 20px;
+    max-height: 100%;
+    background: #cf6ecf;
+    transform: skewY(9deg);
+    position: relative;
+    animation: upscale 1.2s linear;
+}
+
+@keyframes upscale {
+    0% {
+        height: 0;
+    }
+}
+
+.entities::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -3px;
+    right: -100%;
+    background: darkmagenta;
+    transform: skewY(-18deg);
+}
+
+.entities::after {
+    content: '';
+    position: absolute;
+    background: #371037;
+    width: 2.2em;
+    height: 1.7em;
+    top: -1.02em;
+    left: 0.15em;
+    transform: rotateX(99deg) rotateY(-7deg) rotateZ(50deg);
+}
+
+/* .africa {
+    height: 25%;
+} */
+.americas {
+    height: 50%;
+}
+
+.asia {
+    height: 60%;
+}
+.europe {
+    height: 70%;
+}
+.oceania {
+    height: 85%;
+}
+.global {
+    height: 100%;
+}
+
+.entities p {
+    color: black;
+    position: absolute;
+    transform: skewY(-9deg);
+    font-size: 1.1rem;
+    top: -3em;
+    left: 0.15em;
+}
