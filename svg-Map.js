@@ -10,11 +10,11 @@ document.querySelectorAll('.allPaths').forEach(e => {
         
          //add label to mouse position
         e.addEventListener('mousemove', event => {
-            document.getElementById('name').innerHTML = e.attributes[1].value;
+            document.getElementById('name').innerHTML = `${e.attributes[1].value}<br> Data goes here`;
             let x = event.clientX
             let y = event.clientY
-            document.getElementById('name').style.top = y + 40 + "px";
-            document.getElementById('name').style.left = x + "px";
+            document.getElementById('name').style.top = y + 100 + "px";
+            document.getElementById('name').style.left = x + 100+"px";
         })
     });
     

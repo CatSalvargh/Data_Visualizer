@@ -102,12 +102,11 @@ svg path {
     position: absolute;
     font-size: 20px;
     width: 200px;
-    height: 30px;
-    border: 2px, solid, blue;
+    height: 200px;
     box-sizing: border-box;
     transition: 0.1s;
     transform: translate(-50%, -50%);
-    background: rgba(150, 120, 200, 0.9);
+    background: rgba(151, 211, 200, 0.8);
     text-align: center;
 
     cursor: pointer;
@@ -188,10 +187,10 @@ svg path {
 }
 
 .entities p {
-    color: black;
+    color: white;
     position: absolute;
     transform: skewY(-9deg);
     font-size: 1.1rem;
-    top: -3em;
+    top: 2.5rem;
     left: 0.15em;
 }
