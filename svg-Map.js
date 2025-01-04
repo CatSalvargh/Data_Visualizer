@@ -1,6 +1,5 @@
 let paths = document.querySelectorAll('path');
 
-console.log(paths[0].attributes[1].value)
 paths.forEach(path => {
     path.classList.add('allPaths') });
 

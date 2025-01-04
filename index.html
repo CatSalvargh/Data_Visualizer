@@ -6,11 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Data visualisation App</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   </head>
+
   <body>
     <nav id="main-nav">
       <ul id="visuals-menu">
-        <li class="menu-item">Global Map</li>
+        <!-- <li class="menu-item">Global Map</li> -->
       </ul>
     </nav>
 
@@ -1059,18 +1063,20 @@
       </div>
     
       <div class="col">
-          <div id="app" class="canvas-container" style="border: 1px solid red;">
+          <div class="canvas-wrapper wrapper">
+            <div id="app" class="canvas-container .wrapper">
+            </div>
           </div>
           <div id="extra-vis" class="extra-vis-container wrapper">
               <div class="entities africa"><p><span class="percent">25</span>%</p></div>
-              <div class="entities americas"><p><span class="percent">50</span>%</p></div>
+              <div id="americas" class="entities americas"><p><span class="percent">50</span>%</p></div>
               <div class="entities asia"><p><span class="percent">60</span>%</p></div>
               <div class="entities europe"><p><span class="percent">70</span>%</p></div>
               <div class="entities oceania"><p><span class="percent">85</span>%</p></div>
               <div class="entities global"><p><span class="percent">100</span>%</p></div>
-            </div>
           </div>
       </div>
+    </div>
 
     <footer>
       <div id="footer-container" style="border: 1px solid green;">

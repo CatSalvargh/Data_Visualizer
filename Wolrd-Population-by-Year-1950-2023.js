@@ -1,6 +1,6 @@
 function WorldPopHistoric() {
 
-  this.name = 'World Population 1950 to 2023';
+  this.name = 'World Population 1950-2023';
   this.id = 'Global_world_Population_historic';
   this.loaded = false;
 
