@@ -40,12 +40,13 @@ function PieChart(x, y, diameter) {
         }
 
         fill(colour);
-        stroke(0);
-        strokeWeight(1);
-
+        stroke(171, 167, 206);
+        strokeWeight(2);
+        
         arc(this.x, this.y,
             this.diameter, this.diameter,
             lastAngle, lastAngle + angles[i] + 0.001); // Hack for 0!
+
 
         if (labels) {
           this.makeLegendItem(labels[i], i, colour);
@@ -55,6 +56,7 @@ function PieChart(x, y, diameter) {
       }
 
       if (title) {
+        fill(255)
         noStroke();
         textAlign('center', 'center');
         textSize(24);
@@ -71,10 +73,10 @@ function PieChart(x, y, diameter) {
     fill(colour);
     rect(x, y, boxWidth, boxHeight);
 
-    fill('black');
+    fill('white');
     noStroke();
     textAlign('left', 'center');
-    textSize(12);
+    textSize(18);
     text(label, x + boxWidth + 10, y + boxWidth / 2);
 };
 }

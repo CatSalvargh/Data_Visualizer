@@ -4,18 +4,15 @@ function WorldPopHistoric() {
   this.id = 'Global_world_Population_historic';
   this.loaded = false;
 
-  this.title = 'World Population 1950 to 2023'; // Title above the plot.
+  this.title = 'World Population 1950 to 2023'; 
 
   this.xAxisLabel = 'Year';
   this.yAxisLabel = 'Billions';
 
   var marginSize = 35;
 
-  // Layout object to store all common plot layout parameters and methods.
   this.layout = {
       marginSize: marginSize,
-
-      // Margins around the plot. Left/bottom ++space for axis and tick labels
       leftMargin: marginSize * 3,
       rightMargin: width - marginSize,
       topMargin: marginSize,
@@ -30,9 +27,7 @@ function WorldPopHistoric() {
         return this.bottomMargin - this.topMargin;
       },
 
-      grid: true, // Boolean to enable/disable background grid.
-
-      // Number of axis tick labels to draw so that they are not drawn on top of one another.
+      grid: true,
       numXTickLabels: 15,
       numYTickLabels: 8,
   };
@@ -43,19 +38,17 @@ function WorldPopHistoric() {
       '/data/world-population/population-historic-global-continents.csv', 'csv', 'header',
       function(table) {
         self.loaded = true;
-      });  // Callback function: loaded to true.
+      });
 
   };
 
   this.setup = function() {
     textSize(12);
-    // Set min and max years: assumes data is sorted by date.
     this.startYear = this.data.getNum(0, 'year');
     this.endYear = this.data.getNum(this.data.getRowCount() - 1, 'year');
     console.log(this.endYear);
 
-    // Find min and max pay gap for mapping to canvas height.
-    this.minPopulation = 0;   // Pay equality (zero pay gap).
+    this.minPopulation = 0; 
     this.maxPopulation = max(this.data.getColumn('population'));
   };
 
@@ -68,16 +61,14 @@ function WorldPopHistoric() {
       return;
     }
 
-    this.drawTitle(); // Draw the title above the plot.
+    this.drawTitle();
 
-    // Draw all y-axis labels. helper func
     drawYAxisTickLabels(this.minPopulation,
                         this.maxPopulation,
                         this.layout,
                         this.mapPopulationToHeight.bind(this),
                         0);
-
-    // Draw x and y axis. helper func
+                        
     drawAxis(this.layout);
 
     // Draw x and y axis labels. helper func
@@ -85,22 +76,16 @@ function WorldPopHistoric() {
                    this.yAxisLabel,
                    this.layout);
 
-    // Plot all pay gaps between startYear and endYear using the width
-    // of the canvas minus margins.
     var previous;
     var numYears = this.endYear - this.startYear;
-
-    // Loop over all rows and draw a line from previous value to the current.
     for (var i = 0; i < this.data.getRowCount(); i++) {
 
-      // Create an object to store data for the current year.
       var current = {
         year: this.data.getNum(i, 'year'),
         Population: this.data.getNum(i, 'population')
       };
 
       if (previous != null) {
-        // Draw line segment connecting previous year to current
         stroke(255,0,0);
         strokeWeight(3)
         line(
@@ -108,9 +93,7 @@ function WorldPopHistoric() {
           this.mapYearToWidth(current.year), this.mapPopulationToHeight(current.Population)
         );
 
-        
-        
-        
+             
         // The number of x-axis labels to skip so that only numXTickLabels are drawn.
         var xLabelSkip = ceil(int(numYears / this.layout.numXTickLabels));
 
@@ -131,13 +114,17 @@ function WorldPopHistoric() {
   };
 
   this.drawTitle = function() {
-    fill(0);
+    fill(245);
     noStroke();
     textAlign('center', 'center');
+    
+    push();
+    textSize(20);
 
     text(this.title,
          (this.layout.plotWidth() / 2) + this.layout.leftMargin,
          this.layout.topMargin - (this.layout.marginSize / 2));
+    pop();
   };
 
   this.mapYearToWidth = function(value) {

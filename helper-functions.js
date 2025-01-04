@@ -51,17 +51,18 @@ function drawAxis(layout, colour=0) {
 }
 
 function drawAxisLabels(xLabel, yLabel, layout) {
-  fill(0);
+  fill(245);
   noStroke();
   textAlign('center', 'center');
+  
 
   // Draw x-axis label.
+  push()
+  textSize(25);
   text(xLabel,
        (layout.plotWidth() / 2) + layout.leftMargin,
        layout.bottomMargin + (layout.marginSize * 1.5));
 
-  // Draw y-axis label.
-  push();
   translate(layout.leftMargin - (layout.marginSize * 1.5),
             layout.bottomMargin / 2);
   rotate(- PI / 2);

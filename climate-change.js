@@ -1,6 +1,5 @@
 function ClimateChange() {
 
-  // Name & unique ID (no special ch) for the vis to appear in the menu bar.
   this.name = 'Climate Change';
   this.id = 'climate-change';
   this.loaded = false;
@@ -11,11 +10,9 @@ function ClimateChange() {
 
   var marginSize = 35;
 
-  // Layout object to store all common plot layout parameters and methods.
   this.layout = {
       marginSize: marginSize,
 
-      // Margins around the plot. Left/bottom ++space for axis and tick labels
       leftMargin: marginSize * 2,
       rightMargin: width - marginSize,
       topMargin: marginSize,
@@ -30,9 +27,8 @@ function ClimateChange() {
         return this.bottomMargin - this.topMargin;
       },
 
-      grid: false, // Boolean to enable/disable background grid.
+      grid: false,
 
-      // Num of axis tick labels to draw so they don't overlap
       numXTickLabels: 8,
       numYTickLabels: 8,
   };
@@ -43,7 +39,7 @@ function ClimateChange() {
       './data/surface-temperature/surface-temperature.csv', 'csv', 'header',
       function(table) {
         self.loaded = true;
-      }); // Callback function: loaded to true.
+      });
   };
 
   this.setup = function() {
@@ -71,13 +67,13 @@ function ClimateChange() {
                                       this.maxYear - 1,
                                       this.minYear,
                                       1);
-      this.startSlider.position(400, 10);
+      this.startSlider.position(width*2.35, 550);
 
       this.endSlider = createSlider(this.minYear + 1,
                                     this.maxYear,
                                     this.maxYear,
                                     1);
-      this.endSlider.position(600, 10);
+      this.endSlider.position(width*2, 550);
   };
 
   this.destroy = function() {

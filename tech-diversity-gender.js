@@ -3,20 +3,17 @@ function TechDiversityGender() {
   this.id = 'tech-diversity-gender';
   this.loaded = false;
 
-  // Layout object to store all common plot layout parameters and methods.
   this.layout = {
-      // Margins around the plot. Left/bottom ++space for axis and tick labels
-      leftMargin: 130,
-      rightMargin: width,
-      topMargin: 30,
+      leftMargin: 95,
+      rightMargin: width-30,
+      topMargin: 40,
       bottomMargin: height,
       pad: 5,
       plotWidth: function() {
         return this.rightMargin - this.leftMargin;
       },
       
-      grid: true,// Boolean to enable/disable background grid.
-      // Number of axis tick labels to draw so that they are not drawn on top of one another.
+      grid: true,
       numXTickLabels: 10,
       numYTickLabels: 8,
   };
@@ -24,9 +21,8 @@ function TechDiversityGender() {
   // Middle of the plot: for 50% line.
   this.midX = (this.layout.plotWidth() / 2) + this.layout.leftMargin;
 
-  // Default visualisation colours.
-  this.femaleColour = color(255, 0 ,0);
-  this.maleColour = color(0, 255, 0);
+  this.femaleColour = color(194, 62, 221);
+  this.maleColour = color(108, 143, 239);
 
   this.preload = function() {
     var self = this;
@@ -34,7 +30,7 @@ function TechDiversityGender() {
       './data/tech-diversity/gender-2018.csv', 'csv', 'header',
       function(table) {
         self.loaded = true;
-      }); // Callback function: loaded to true.
+      });
   };
 
   this.setup = function() {
@@ -49,13 +45,12 @@ function TechDiversityGender() {
         console.log('Data not yet loaded');
         return;
       }
-      // Draw Female/Male labels at the top of the plot.
+
       this.drawCategoryLabels();
 
       var lineHeight = (height - this.layout.topMargin) /
           this.data.getRowCount();
 
-          // Loop over every row in the data.
       for (var i = 0; i < this.data.getRowCount(); i++) {
         // Calculate company y position
         var lineY = (lineHeight * i) + this.layout.topMargin;
@@ -70,18 +65,18 @@ function TechDiversityGender() {
         fill(0);
         noStroke();
         textAlign('right', 'top');
+        textSize(12);
         text(company.name,
             this.layout.leftMargin - this.layout.pad,
             lineY);
 
-        // Draw female employees rectangle.
+        stroke(0)
         fill(this.femaleColour);
         rect(this.layout.leftMargin,
             lineY,
             this.mapPercentToWidth(company.female),
             lineHeight - this.layout.pad);
 
-        // Draw male employees rectangle.
         fill(this.maleColour);
         rect(this.layout.rightMargin,
             lineY,
@@ -99,20 +94,21 @@ function TechDiversityGender() {
     };
 
   this.drawCategoryLabels = function() {
-    fill(0);
+    fill(245);
     noStroke();
+    textSize(18);
     textAlign('left', 'top');
     text('Female',
         this.layout.leftMargin,
-        this.layout.pad);
+        this.layout.pad+5);
     textAlign('center', 'top');
     text('50%',
         this.midX,
-        this.layout.pad);
+        this.layout.pad+5);
     textAlign('right', 'top');
     text('Male',
         this.layout.rightMargin,
-        this.layout.pad);
+        this.layout.pad+5);
   };
 
   this.mapPercentToWidth = function(percent) {

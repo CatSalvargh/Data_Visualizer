@@ -23,7 +23,7 @@ body{
     border: 1px solid gray;
     list-style-type: none;
     padding: 5px;
-    color: #cf6ecf;
+    color: rgb(207, 110, 207);
     text-align: center;
     padding-top: 0.8rem;
     font-size: 1.2rem;
@@ -36,7 +36,7 @@ body{
 }
 
 .map-container {
-    display: inline-flex;
+    display: flex;
     align-self: center;
     flex: 1 0 auto;
     width: 55vw;
@@ -60,10 +60,10 @@ body{
     min-height: 42vh;
     animation: move 1s linear infinite;
     border-radius: 10px;
-    padding: 15px 0 15px 35px;
+    padding: 15px 0 15px 0;
 }
 
-.wrapper, .menu-item {
+.wrapper, .menu-item, .showName, .showLabel {
     box-shadow: -2px 2px 3px #bbb30b,
     5px 5px 20px rgba(0,0,0,0.8),
     inset 5px 5px 15px rgba(255, 255, 255, 0.3),
@@ -100,31 +100,37 @@ svg path {
 .showName {
     display: block;
     position: absolute;
+    width: 12ch;
+    height: 40px;
     font-size: 20px;
-    width: 200px;
-    height: 200px;
     box-sizing: border-box;
+    padding-top: 0.2em;
     transition: 0.1s;
     transform: translate(-50%, -50%);
-    background: rgba(151, 211, 200, 0.8);
+    background: rgba(151, 211, 200, 0.4);
     text-align: center;
-
     cursor: pointer;
-    color: blue;
+    color: white;
+    text-shadow: 3px 3px rgb(177, 117, 204);
+}
+
+.noShow{
+    display: none;
+}
+
+.showLabel {
+    display:inline-flex;
+    width: 300px;
+    height: 200px; 
+    background: rgba(151, 211, 200, 0.3);
+    align-self: flex-start;
+    margin: 10px 15px 0 0;
 }
 
 .mouse-in {
     fill: steelblue;
     opacity: 1;
     width: 400px;
-}
-
-#labelData {
-    display: block;
-    position: absolute;
-    width: 400;
-    height: 250;
-    background: red;
 }
 
 /* Bar Chart */
