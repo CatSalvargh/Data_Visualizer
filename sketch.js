@@ -3,12 +3,14 @@ var gallery;
 function setup() {
   canvasContainner = select('#app');
   var c = createCanvas(850, 470);
+  c.id('canvas')
   c.parent('app');
   c.style('padding', 10+'px');
   c.style('background', 'rgb(128, 137, 188');
   canvasContainner = select('.extra-vis-container');
   nav = select('#visuals-menu')
   nav.parent('#main-nav')
+
 
   gallery = new Gallery();
 

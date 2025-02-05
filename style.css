@@ -1,3 +1,9 @@
+:root {
+   --mainBg: rgb(63, 72, 120);
+   --accentText:  rgb(207, 110, 207);
+   --accentHover: rgb(187, 179, 11);
+}
+
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -11,7 +17,7 @@ body{
     gap: 1rem;
     font-family: sans-serif;
     flex-wrap: nowrap;
-    background: rgb(63, 72, 120);
+    background: var(--mainBg);
     padding: 1.5rem 1.5rem 0 0;
     font-family: poppins, sans-serif;
     font-weight: 600;
@@ -23,7 +29,7 @@ body{
     border: 1px solid gray;
     list-style-type: none;
     padding: 5px;
-    color: rgb(207, 110, 207);
+    color: var(--accentText);
     text-align: center;
     padding-top: 0.8rem;
     font-size: 1.2rem;
@@ -55,7 +61,9 @@ body{
 
 .wrapper {
     display: flex;
-    justify-content: space-evenly;
+    /* justify-content: space-around; */
+    justify-content: center;
+    gap: 5em;
     align-items: flex-end;
     min-height: 42vh;
     animation: move 1s linear infinite;
@@ -64,17 +72,17 @@ body{
 }
 
 .wrapper, .menu-item, .showName, .showLabel {
-    box-shadow: -2px 2px 3px #bbb30b,
+    box-shadow: -2px 2px 3px var(--accentHover),
     5px 5px 20px rgba(0,0,0,0.8),
     inset 5px 5px 15px rgba(255, 255, 255, 0.3),
     inset -5px -5px 15px rgba(255, 255, 255, 0.3);
-    border-left: 2px solid #bbb30b;
-    border-bottom: 2px solid #bbb30b;
+    border-left: 2px solid var(--accentHover);
+    border-bottom: 2px solid var(--accentHover);
     background: rgba(50, 50, 80, 0.3);
 }
 
 .selected, .hover{
-    background: rgba(187, 179, 11, 0.9);;
+    background: var(--accentHover);
     color: black;
 }
 
@@ -88,7 +96,7 @@ body{
 
 /* SVG Map*/
 svg {
-    width: 98%;
+    width: 100%;
 }
 
 svg path {
@@ -100,18 +108,19 @@ svg path {
 .showName {
     display: block;
     position: absolute;
-    width: 12ch;
+    width: 14ch;
     height: 40px;
-    font-size: 20px;
+    font-size: 1.5rem;
     box-sizing: border-box;
-    padding-top: 0.2em;
+    padding-top: 0.15em;
     transition: 0.1s;
     transform: translate(-50%, -50%);
-    background: rgba(151, 211, 200, 0.4);
+    background: rgba(151, 211, 200, 0.3);
     text-align: center;
     cursor: pointer;
-    color: white;
-    text-shadow: 3px 3px rgb(177, 117, 204);
+    color: var(--accentText);
+    text-shadow: 2px 3px 2px darkblue;
+    letter-spacing: .1rem;
 }
 
 .noShow{
@@ -120,31 +129,58 @@ svg path {
 
 .showLabel {
     display:inline-flex;
-    width: 300px;
-    height: 200px; 
+    width: 500px;
+    height: 300px; 
     background: rgba(151, 211, 200, 0.3);
     align-self: flex-start;
     margin: 10px 15px 0 0;
 }
 
 .mouse-in {
-    fill: steelblue;
-    opacity: 1;
+    fill: var(--accentHover);
+    opacity: 0.8;
     width: 400px;
 }
 
 /* Bar Chart */
+.africaSVG {
+    position: absolute;
+    top: 77vh;
+    left: 67vw;
+    height: 54%;
+    animation: go-up 1.2s linear;
+    transform: translateZ(20%);
+}
+
+.barChartTitle, .barChartP {
+    position: absolute;
+    top: 61vh;
+    left: 62vw;
+    z-index: 1;
+}
+
+.barChartTitle {
+    position: absolute;
+    top: 58vh;
+    
+}
+
+@keyframes go-up {
+    0% {
+        top: 90vh
+    }
+}
 
 .entities {
     width: 20px;
     max-height: 100%;
-    background: #cf6ecf;
+    background: var(--accentText);
     transform: skewY(9deg);
     position: relative;
-    animation: upscale 1.2s linear;
+    animation: grow 1.2s linear;
 }
 
-@keyframes upscale {
+@keyframes grow {
     0% {
         height: 0;
     }
@@ -176,7 +212,7 @@ svg path {
     height: 25%;
 }
 .americas {
-    height: 50%;
+    height: 45%;
 }
 
 .asia {
@@ -186,7 +222,7 @@ svg path {
     height: 70%;
 }
 .oceania {
-    height: 85%;
+    height: 75%;
 }
 .global {
     height: 100%;
@@ -197,6 +233,6 @@ svg path {
     position: absolute;
     transform: skewY(-9deg);
     font-size: 1.1rem;
-    top: 2.5rem;
-    left: 0.15em;
+    top: 2.4rem;
+    left: 0.1em;
 }

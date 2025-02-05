@@ -52,9 +52,7 @@ function TechDiversityGender() {
           this.data.getRowCount();
 
       for (var i = 0; i < this.data.getRowCount(); i++) {
-        // Calculate company y position
         var lineY = (lineHeight * i) + this.layout.topMargin;
-        // Create an object that stores data from the current row.
         var company = {
             name: this.data.getString(i, 0),
             female: this.data.getNum(i, 1),

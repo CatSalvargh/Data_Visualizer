@@ -86,8 +86,8 @@ function WorldPopHistoric() {
       };
 
       if (previous != null) {
-        stroke(255,0,0);
-        strokeWeight(3)
+        stroke('gold');
+        strokeWeight(4)
         line(
           this.mapYearToWidth(previous.year), this.mapPopulationToHeight(previous.Population),
           this.mapYearToWidth(current.year), this.mapPopulationToHeight(current.Population)
@@ -103,12 +103,11 @@ function WorldPopHistoric() {
           drawXAxisTickLabel(previous.year, this.layout,
                              this.mapYearToWidth.bind(this));
           ellipse(this.mapYearToWidth(previous.year), this.mapPopulationToHeight(previous.Population), 7, 7);
+
+          this.dataToolTip(this.mapYearToWidth(previous.year), this.mapPopulationToHeight(previous.Population), current)
         }
       }
 
-      // Assign current year to previous year so that it is available
-      // during the next iteration of this loop to give us the start
-      // position of the next line segment.
       previous = current;
     }
   };
@@ -143,4 +142,22 @@ function WorldPopHistoric() {
       this.layout.topMargin
     )
   };
+
+  this.dataToolTip = function(x, y, data){
+    let mouseDist = dist(x, y, mouseX, mouseY);
+    if (mouseDist < 20) {
+      push();
+      fill(64, 76, 145, 100);
+      stroke(0);
+      rect(mouseX-180, mouseY+30, 250, 100, 10)
+      fill(207, 110, 207);
+      stroke(64, 76, 145);
+      strokeWeight(4);
+      textSize(22);
+      textAlign('CENTER');
+      text(`\n\nYear: ${data.year}, \n Population: ${data.Population.toFixed(2)} Billion`, mouseX - 60, mouseY+ 60)
+      pop();
+    }
+  }
+
 }

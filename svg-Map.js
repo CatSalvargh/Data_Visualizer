@@ -1,9 +1,9 @@
 let paths = document.querySelectorAll('path');
 
 paths.forEach(path => {
-    path.classList.add('allPaths') });
+    path.classList.add('paths') });
 
-document.querySelectorAll('.allPaths').forEach(e => {
+document.querySelectorAll('.paths').forEach(e => {
     e.addEventListener('mouseenter', function(){
         e.classList.add('mouse-in');
         document.getElementById('name').classList.add('showName');
