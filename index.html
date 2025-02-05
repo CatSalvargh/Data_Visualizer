@@ -19,9 +19,10 @@
     </nav>
 
     <div class="dash-container grid">
-      <div id="name">
-      </div>
+
       <div class="map-container wrapper">
+        <div id="name"></div>
+        <div class="svg-container">
         <?xml version="1.0" encoding="UTF-8" standalone="no"?>
         <!-- SVG MAP Created for MapSVG plugin: http://mapsvg.com -->
         <svg
@@ -31,8 +32,12 @@
           xmlns:svg="http://www.w3.org/2000/svg"
           xmlns="http://www.w3.org/2000/svg"
           mapsvg:geoViewBox="-169.110266 83.600842 190.486279 -58.508473"
-          width="1009.6727"
-          height="665.96301">
+          viewbox="0 0 1000 1000"
+          width="250px"
+          height="250px"
+          >
+          <!-- width="1009.6727"
+          height="665.96301" -->
         
           <path
             d="m 479.68275,331.6274 -0.077,0.025 -0.258,0.155 -0.147,0.054 -0.134,0.027 -0.105,-0.011 -0.058,-0.091 0.006,-0.139 -0.024,-0.124 -0.02,-0.067 0.038,-0.181 0.086,-0.097 0.119,-0.08 0.188,0.029 0.398,0.116 0.083,0.109 10e-4,0.072 -0.073,0.119 z"
@@ -1059,16 +1064,18 @@
             title="Zimbabwe"
             id="ZW" />
         </svg>
-        <div id="label" class="noShow">
-          <p id="labelP">Data goes here</p>
+        </div>
+        <div id="label" class="noShow label-container">
+          <p id="labelP"></p>
         </div>
       </div>
     
       <div class="col">
           <div class="canvas-wrapper wrapper">
-            <div id="app" class="canvas-container .wrapper">
+              <div id="app" class="canvas-container">
             </div>
           </div>
+          
           <h2 class="barChartTitle">Continent Population 2023</h2>
           <p class="barChartP">Data to be inserted with JS JQuery or D3 + other continents' SVG to be added</p> 
           <div id="extra-vis" class="extra-vis-container wrapper">
@@ -1383,9 +1390,8 @@
              75 -66 106 -63 22 3 25 8 28 47 4 53 -21 125 -51 146 -24 17 -24 17 -52 5z"/>
              </g>
               </svg>
-             
-
-            </div>
+  
+            </div class="barchart-wrapper">
               <div class="entities africa"><p><span class="percent">25</span>%</p></div>
               <div id="americas" class="entities americas"><p><span class="percent">50</span>%</p></div>
               <div class="entities asia"><p><span class="percent">60</span>%</p></div>

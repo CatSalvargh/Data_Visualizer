@@ -14,8 +14,8 @@ document.querySelectorAll('.paths').forEach(e => {
             document.getElementById('name').innerHTML = e.attributes[1].value;
             let x = event.clientX
             let y = event.clientY
-            document.getElementById('name').style.top = y + 40 + "px";
-            document.getElementById('name').style.left = x + 80+"px";
+            document.getElementById('name').style.top = y - 130 + "px";
+            document.getElementById('name').style.left = x + 80 +"px";
         })
     });
     

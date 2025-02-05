@@ -1,13 +1,23 @@
 var gallery;
+const canvasContainner = document.querySelector('.canvas-container');
+let w;
+let h;
 
 function setup() {
-  canvasContainner = select('#app');
-  var c = createCanvas(850, 470);
+    w = canvasContainner.clientWidth;
+    h = canvasContainner.clientHeight;
+
+  var c = createCanvas(w, h);
   c.id('canvas')
   c.parent('app');
+  c.style('position', 'relative');
+  c.style('inset', 0);
+  c.style('width', 100+'%');
+  c.style('height', 100+'%');
   c.style('padding', 10+'px');
   c.style('background', 'rgb(128, 137, 188');
-  canvasContainner = select('.extra-vis-container');
+  
+  const menuContainner = select('.extra-vis-container');
   nav = select('#visuals-menu')
   nav.parent('#main-nav')
 
