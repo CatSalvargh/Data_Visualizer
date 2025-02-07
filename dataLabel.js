@@ -1,121 +1,119 @@
-const container = document.querySelector('.map-container')
-const contWidth = container.clientWidth;
-const contHeight = container.clientHeight;
+const url = './data/world-population/population-historic-global-continents-table.csv'
+const values = []
 
-const marginD3 = {top: 30, right: 30,  bottom: 50, left: 30}
-const widthD3 =  contWidth * 0.35 - marginD3.left - marginD3.right;
-const heightD3 =  contHeight * 0.33 - marginD3.top - marginD3.bottom;
+const container = document.querySelector('#label')
+const widthD3 = container.clientWidth;
+const heightD3 = container.clientHeight;
+const padding = widthD3 * 0.07;
 
-//If needed copy/paste commented code below from here
+let yScale
+let xScale
+let xAxisScale
+let yAxisScale
 
-const data1 = [
-    {continent: "africa", value: 22},
-    {continent: "americas", value: 33}, 
-    {continent: "asia", value: 13},
-    {continent: "europe", value: 7},
-    {continent: "oceania", value: 12},
-    {continent: "Global", value: 24},
-]
-// const data1 = [
-//     {continent: "africa", value: 227776419},
-//     {continent: "americas", value: 335791493}, 
-//     {continent: "asia", value: 1368075411},
-//     {continent: "europe", value: 548867469},
-//     {continent: "oceania", value: 12582041},
-//     {continent: "Global", value: 2493092833},
-// ]
+const svg = d3.select('#map-label')
 
-console.log(data1);
+svg.append('text')
+    .text('Global Population')
+    .attr('id', 'title')
+    .attr('x', widthD3 * 0.15)
+    .attr('y', padding + heightD3 * 0.015)
 
-const svg = d3.select('#label')
-    .append('svg')
-    .attr('width', widthD3 + marginD3.left + marginD3.right)
-    .attr('height', heightD3 + marginD3.top + marginD3.bottom)
-    .append('g')
-    .attr('transform', `translate(${marginD3.left},${marginD3.top})`) 
+d3.csv(url).then(function (data) {
 
-const x = d3.scaleBand()
-    .range([0, widthD3])
-    .domain(data1.map(function(d) {return d.continent}))
-    .padding(0.15);
+    const parseTime = d3.timeParse("%Y")
+    const formatTime = d3.timeFormat("%Y")
+    data.forEach(d => {
+    d.year = parseTime(d.year);
+    d.population = +(d.population /1000000000).toFixed(2);
+    values.push({year: formatTime(d.year), population: d.population})
+    });
 
-const y = d3.scaleLinear()
-    .range([heightD3, 0])
-    .domain([0, d3.max(data1, d => (d.value))])
+    drawCanvas()
+    generateScales()
+    generateAxis()
+    drawBars()
 
-svg.append('g')
-    .attr('transform', `translate(0, ${heightD3})`)
-    .style('font-size', '14px')
-    .call(d3.axisBottom(x));
-    //     .ticks(d3.timeYear.every(7))
-    //     .tickFormat(d3.timeFormat('%b %Y')))
-    //     .selectAll('.tick line')
-    //     .style('stroke-opacity', 1)
-    // svg.selectAll('.tick text')
-    //     .attr('fill', '#777');
+})
 
-svg.append('g')
-    .style('font-size', '14px')
-    .call(d3.axisLeft(y));
+const drawCanvas = () => {
+    svg.attr('width', widthD3)
+    svg.attr('height', heightD3)
+}
 
-svg.selectAll('test')
-.data(data1)
-.enter()
-.append('rect')
-    .attr('x', function(d) { return x(d.continent)})
-    .attr('y', function(d) { return y(d.value)})
-    .attr('width', x.bandwidth()*.6)
-    .attr('height', function(d) {return heightD3 - y(d.value)})
-    .attr('fill', 'rgb(207, 110, 207)')
-// to here
+const  generateScales = () => {
+    yScale = d3.scaleLinear()
+                .domain([0, d3.max(values, (d) => {return d.population})])
+                .range([0, heightD3 - (2*padding)])
 
+    xScale = d3.scaleLinear()
+                .domain([0, values.length -1])
+                .range([padding, widthD3 - padding])
 
-// const data1 = [
-//     {continent: "africa", value: 22},
-//     {continent: "americas", value: 33}, 
-//     {continent: "asia", value: 13},
-//     {continent: "europe", value: 7},
-//     {continent: "oceania", value: 12},
-//     {continent: "Global", value: 24},
-// ]
+    let datesArray = values.map((d) => {
+        return new Date(d.year)
+    })
 
-// const xD3 = d3.scaleTime()
-//     .range([0, widthD3]);
+    xAxisScale = d3.scaleTime()
+                .domain([d3.min(datesArray), d3.max(datesArray)])
+                .range([padding, widthD3 - padding])
+    
+    yAxisScale = d3.scaleLinear()
+                .domain([0, d3.max(values, (d) => {return d.population})])
+                .range([heightD3 - padding, padding])
+}
 
-// const yD3 = d3.scaleLinear()
-//     .range([heightD3, 0]);
+const generateAxis = () => {
+    let xAxis = d3.axisBottom(xAxisScale)
+                    .ticks(d3.timeYear.every(7))
+                    .tickFormat(d3.timeFormat('%Y'))
+   
+    let yAxis = d3.axisLeft(yAxisScale)
 
-//     const svg = d3.select('#label')
-//     .append('svg')
-//         .attr('width', widthD3 + marginD3.left + marginD3.right)
-//         .attr('height', heightD3 + marginD3.top + marginD3.bottom)
-//     .append('g')
-//         .attr('transform', `translate(${marginD3.left},${marginD3.top})`) 
+    svg.append('g')
+        .attr('id', 'x-axis')
+        .attr('transform', `translate(0, ${heightD3 - padding})`)
+        .call(xAxis)
 
-// d3.csv('./data/world-population/population-historic-global-continents-table.csv').then(function (data) {
+    svg.append('g')
+        .call(yAxis)
+        .attr('id', 'y-axis')
+        .attr('transform', `translate(${padding}, 0)`)
+}
 
-//     const parseYear = d3.timeFormat("%Y");
-//     data.forEach(d => {
-//         d.year = parseYear(d.year);
-//         d.population = +d.population;
-//     });
-//     console.log(data);
+const drawBars = () => {
+    let bars =  svg.append('g')
+    let tooltip = svg.append('g')
+    
+    tooltip.attr('opacity', 0)
+            .attr('id', 'tooltip')
 
-// xD3.domain(d3.extent(data, d => d.year));
-// yD3.domain([0, d3.max(data, d => (d.population/1000000000))]); 
-
-// svg.append('g')
-//     .attr('transform', `translate(0, ${heightD3})`)
-//     .style('font-size', '14px')
-//     .call(d3.axisBottom(xD3)
-//         .ticks(d3.timeYear.every(7))
-//         .tickFormat(d3.timeFormat('%b %Y')))
-//         .selectAll('.tick line')
-//         .style('stroke-opacity', 1)
-//     svg.selectAll('.tick text')
-//         .attr('fill', '#777');
-
-// svg.append('g')
-//     .style('font-size', '14px')
-//     .call(d3.axisLeft(yD3))
-// })
+    tooltip.append('text')
+            .text("This is text")
+            .attr('font-size', 13)     
+            .attr('fill', 'rgb(187, 179, 11)');
+    
+    bars.selectAll('rect')
+        .data(values)
+        .enter()
+        .append('rect')
+        .attr('class', 'bar')
+        .attr('width', ((widthD3 - 2 * padding)) / values.length)
+        .attr('data-date', (d) => {return d.year})
+        .attr('data-gdp', (d) => {return d.population})
+        .attr('height', (d) => {return yScale(d.population)})
+        .attr('x', (d, index) => {return xScale(index)})
+        .attr('y', (d) => {return heightD3 - padding - yScale(d.population)})
+        .attr('fill', '#69a3b2')
+        .on('mouseover', (event, d) => {
+            tooltip.select('text')
+                    .text(`${d.year} - ${d.population} Billion`)
+                    .attr('x',  widthD3 * 0.20)
+                    .attr('y',  padding + heightD3 * 0.1)                   
+                    
+            tooltip.attr('opacity', 1)
+        })
+        .on('mouseout', (d) => {
+            tooltip.attr('opacity', 0)
+        })
+}
