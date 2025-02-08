@@ -85,11 +85,11 @@
      }
  }
  
- .wrapper, .menu-item, .showName, .showLabel {
-     box-shadow: -5px 6px 20px var(--accentHoverLight),
+ .wrapper, .menu-item, .showName, .showLabel, .labelClicked {
+     box-shadow: -5px 6px 12px var(--accentHoverLight),
      5px 5px 20px rgba(0,0,0,0.8),
-     inset 5px 5px 15px rgba(255, 255, 255, 0.3),
-     inset -5px -5px 15px rgba(255, 255, 255, 0.3);
+     inset 5px 5px 10px rgba(255, 255, 255, 0.3),
+     inset -5px -5px 10px rgba(255, 255, 255, 0.3);
      border-left: 2px solid var(--accentHoverLight);
      border-bottom: 2px solid var(--accentHoverLight);
      background: rgba(50, 50, 80, 0.3);
@@ -171,31 +171,48 @@
      z-index: 20;
  }
  
- .noShow{
+ .noShow {
      opacity: 0;
-     width: 35%;
-     height: 35%;
+     position: absolute;
+     top: 26rem;
+     left: 1rem;
  }
  
  #label {
-     width: 35%;
-     height: 35%;
+     width: 32%;
+     height: 32%;
  }
  
  .showLabel, .labelClicked  {
     opacity: 1;
      display: inline-flex;
      position: absolute;
-     top: 28rem;
-     left: 1rem;
+     top: 26rem;
+     left: 1.25rem;
      width: 73%;
      height: 15%;
      height: auto; 
-     background: rgba(151, 211, 200, 0.45);
+     
      align-self: flex-start;
      margin: 10px 15px 0 0;
  }
- 
+
+ .userInput {
+    background: var(--mainBg);
+    color: white;
+
+ }
+
+ .userInput {
+    display: inline-flex;
+    width: auto;
+    height: 20px;
+    font-size: 0.725em;
+    padding: 0.15rem 0.5rem 0 0;
+    font-weight: 300;
+ }
+
+
  .mouse-in {
      fill: var(--accentHover);
      opacity: 0.8;

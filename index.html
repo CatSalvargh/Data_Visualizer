@@ -14,13 +14,15 @@
   <body>
     <nav id="main-nav">
       <ul id="visuals-menu">
-        <!-- <li class="menu-item">Global Map</li> -->
       </ul>
     </nav>
 
     <div class="dash-container grid">
 
       <div class="map-container wrapper">
+        <label for="whichContinent" class="userInput">Select a continent: </label>
+        <select id="wichContinent" class="userInput"  type="select" placeholder="type a continent" value="global" onchange="updateChart()"></select>
+    
         <div id="name"></div>
         <div class="svg-container">
         <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -1067,7 +1069,7 @@
         </div>
 
         <div id="label" class="noShow">
-          <svg id="map-label">
+          
         </svg>
 
         </div>

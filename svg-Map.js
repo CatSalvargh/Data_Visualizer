@@ -1,4 +1,6 @@
 let paths = document.querySelectorAll('path');
+const nameLabel = document.getElementById('name');
+const dataLabel = document.getElementById('label')
 
 paths.forEach(path => {
     path.classList.add('paths') });
@@ -6,31 +8,31 @@ paths.forEach(path => {
 document.querySelectorAll('.paths').forEach(e => {
     e.addEventListener('mouseenter', function(){
         e.classList.add('mouse-in');
-        document.getElementById('name').classList.add('showName');
-        document.getElementById('label').classList.toggle('showLabel');
+        nameLabel.classList.add('showName');
+        dataLabel.classList.toggle('showLabel');
         
          //add label to mouse position
         e.addEventListener('mousemove', event => {
-            document.getElementById('name').innerHTML = e.attributes[1].value;
-            let size = document.getElementById('name').id
+            nameLabel.innerHTML = e.attributes[1].value;
+            let size = nameLabel.id
             let x = event.clientX
             let y = event.clientY
-            document.getElementById('name').style.top = y - 170 + "px";
-            document.getElementById('name').style.left = x + 20 +"px";
+            nameLabel.style.top = y - 170 + "px";
+            nameLabel.style.left = x + 20 +"px";
         })
     });
     
     e.addEventListener('mouseout', function(){
         e.classList.remove('mouse-in');
-        document.getElementById('name').classList.remove('showName');
-        document.getElementById('name').classList.add();
-        document.getElementById('name').innerHTML = "";
-        document.getElementById('label').classList.remove('showLabel');
-        document.getElementById('label').classList.add('noShow');
+        nameLabel.classList.remove('showName');
+        nameLabel.classList.add();
+        nameLabel.innerHTML = "";
+        dataLabel.classList.remove('showLabel');
+        dataLabel.classList.add('noShow');
     });
 
     e.addEventListener('click', function() {
-        document.getElementById('label').classList.toggle('labelClicked');
-        document.getElementById('label').classList.remove('showLabel');
+        dataLabel.classList.toggle('labelClicked');
+        dataLabel.classList.remove('showLabel');
     })
 });
