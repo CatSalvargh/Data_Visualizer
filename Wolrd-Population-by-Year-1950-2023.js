@@ -46,8 +46,6 @@ function WorldPopHistoric() {
     textSize(12);
     this.startYear = this.data.getNum(0, 'year');
     this.endYear = this.data.getNum(this.data.getRowCount() - 1, 'year');
-    console.log(this.endYear);
-
     this.minPopulation = 0; 
     this.maxPopulation = max(this.data.getColumn('population'));
   };

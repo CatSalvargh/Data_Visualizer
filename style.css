@@ -29,11 +29,11 @@
      height: 50px;
      border: 1px solid gray;
      list-style-type: none;
-     padding: 5px;
+     padding: clamp(2px, 5px, 0.01vw);
      color: var(--accentText);
      text-align: center;
      padding-top: 0.8rem;
-     font-size: 1.2rem;
+     font-size: clamp(11px, 1rem, 1vw);
  }
  
  .dash-container {
@@ -65,7 +65,7 @@
  
  .canvas-wrapper {
      display: block;
-     min-height: 42vh;
+     min-height: 40vh;
  }
  
  .canvas-container {
@@ -75,7 +75,6 @@
      margin: 0.9em auto;
      width: 90%;
      height: 94%;
-     border: 2px solid yellow;
  }
  
  @media (min-width: 750px) {
@@ -108,6 +107,26 @@
      gap: 30px;
  }
  
+ .startSlider, .endSlider {
+    position: absolute;
+    top: 0;
+    left: 10;
+    inset: 0 0 0 2rem;
+    width: 70px;
+    margin: 0 auto;
+ }
+
+ .selectorPie {
+    position: relative;
+    top: 2rem;
+    left: 0;
+    inset: 0 0 0 2rem;
+    width: 70px;
+    margin: 0 auto;
+ }
+
+
+
  /* SVG Map*/
  
  .map-container {

@@ -20,7 +20,8 @@ function TechDiversityRace() {
       }
 
       this.select = createSelect();
-      this.select.position(width*1.8, 220);
+      this.select.parent('canvasWrapper')
+      this.select.class('selectorPie');
       this.select.style('background', 'rgba(110, 118, 173, 0.8)');
       this.select.style('border', '2px solid rgb(171, 167, 206)');
       this.select.style('font-size', 18+'px');
@@ -30,7 +31,7 @@ function TechDiversityRace() {
       }
   };
 
-    this.destroy = function() {
+  this.destroy = function() {
     this.select.remove();
   };
 

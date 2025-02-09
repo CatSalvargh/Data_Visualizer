@@ -12,13 +12,10 @@ let xAxisScale
 let yAxisScale
 
 const svg = d3.select('#label').append('svg').attr('id', 'map-label')
-
-let continentList = document.getElementById('wichContinent').options;
+const continentList = document.getElementById('wichContinent').options;
 const continents = ['Global', 'Africa', 'Americas', 'Asia', 'Europe', 'Oceania']
 
-continents.forEach(option =>
-    continentList.add(new Option(option)) 
-);
+continents.forEach(option => continentList.add(new Option(option)));
 
 updateChart()
 drawChart('global')
@@ -56,6 +53,7 @@ function drawChart(entity) {
                 } 
                 values.push({year: formatTime(d.year), global: d.global, population: entityData}) 
         })
+
         drawCanvas()
         generateScales(values)
         generateAxis()
@@ -74,7 +72,6 @@ const drawCanvas = () => {
 }
 
 const  generateScales = (arr) => {
-    console.log(arr)
     yScale = d3.scaleLinear()
                     .domain([0, d3.max(arr, (d) => {return d.global})]) //d.population is where the numeric value is store in the values aray
                     .range([0, heightD3 - (2*padding)])
@@ -117,7 +114,7 @@ const drawBars = (arr) => {
     let bars = svg.append('g')
                 .attr('class', 'barsG')
     
-    let barColor = d3.scaleSequential(d3.interpolateRdYlBu).domain([100, 0])
+    let barColor = d3.scaleSequential(d3.interpolateRdYlBu).domain([130, 0])
 
     let tooltip = d3.select('svg')
                     .append('g')
@@ -128,7 +125,7 @@ const drawBars = (arr) => {
                     
     tooltip.append('text')
             .data(arr)
-            .attr('fill', (d, i) => {return barColor(i)})
+            .attr('fill', 'white')
                             
     bars.selectAll('rect')
         .data(arr)
@@ -143,7 +140,7 @@ const drawBars = (arr) => {
         .attr('x', (d, index) => {return xScale(index)})
         .attr('y', (d) => {return heightD3 - padding - yScale(d.population)})
         .on('mouseover', (event, d) => {
-            tooltip.attr('transform', `translate(${event.x}, ${event.y})`)
+            // tooltip.attr('transform', `translate(${event.x}, ${event.y})`)
             tooltip.select('text')
                     .text(`${d.year} - ${d.population} Billion`)
             
@@ -155,10 +152,10 @@ const drawBars = (arr) => {
 }
 
 function updateChart() {
-    const userInput = document.getElementById('wichContinent').value
-    const label = document.getElementById('label')
+        const userInput = document.getElementById('wichContinent').value
+        const label = document.getElementById('label')
 
-    d3.selectAll('rect').remove()
-    drawChart(userInput.toLowerCase())
-    label.classList.add('showLabel');
+        d3.selectAll('rect').remove()
+        drawChart(userInput.toLowerCase())
+        label.classList.add('showLabel');
 }

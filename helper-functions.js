@@ -55,8 +55,6 @@ function drawAxisLabels(xLabel, yLabel, layout) {
   noStroke();
   textAlign('center', 'center');
   
-
-  // Draw x-axis label.
   push()
   textSize(25);
   text(xLabel,
