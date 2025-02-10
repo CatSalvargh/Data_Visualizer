@@ -57,10 +57,11 @@
      justify-content: center;
      gap: 5em;
      align-items: flex-end;
-     min-height: 42vh;
      animation: move 1s linear infinite;
      border-radius: 10px;
      padding: 15px 0 15px 0;
+     min-height: 40vh;
+     min-width: 35vw; 
  }
  
  .canvas-wrapper {
@@ -124,8 +125,6 @@
     width: 70px;
     margin: 0 auto;
  }
-
-
 
  /* SVG Map*/
  
@@ -231,15 +230,31 @@
     font-weight: 300;
  }
 
-
  .mouse-in {
      fill: var(--accentHover);
      opacity: 0.8;
      width: 400px;
  }
  
+
+ /*CONTINENT COMPARISSON VIS*/
+ #continentComparisson {
+    width: 90%;
+    height: 98%;
+    font-size: 1.5em;
+ }
+
+
+
+ /* END CONTINENT COMPARISSON*/
+
+
  /* Bar Chart */
- .africaSVG {
+ /*Tem no display */
+ .barchart-wrapper, .africaSVG {
+    display: none;
+ }
+ /* .africaSVG {
      position: absolute;
      top: 77vh;
      left: 67vw;
@@ -268,7 +283,7 @@
  }
  
  .entities {
-     width: 20px;
+     width: 1vw;
      max-height: 100%;
      background: var(--accentText);
      transform: skewY(9deg);
@@ -331,4 +346,4 @@
      font-size: 1.1rem;
      top: 2.4rem;
      left: 0.1em;
- }
+ } */

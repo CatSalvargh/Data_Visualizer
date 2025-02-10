@@ -72,13 +72,13 @@ const drawCanvas = () => {
 }
 
 const  generateScales = (arr) => {
-    yScale = d3.scaleLinear()
-                    .domain([0, d3.max(arr, (d) => {return d.global})]) //d.population is where the numeric value is store in the values aray
-                    .range([0, heightD3 - (2*padding)])
-
-    xScale = d3.scaleLinear()
+   xScale = d3.scaleLinear()
                 .domain([0, arr.length -1])
                 .range([padding, widthD3 - padding])
+
+    yScale = d3.scaleLinear()
+    .domain([0, d3.max(arr, (d) => {return d.global})]) //d.population is where the numeric value is store in the values aray
+    .range([0, heightD3 - (2*padding)])
 
     let datesArray = arr.map((d) => {
         return new Date(d.year)

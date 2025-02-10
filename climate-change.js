@@ -4,8 +4,6 @@ function ClimateChange() {
   this.id = 'climate-change';
   this.loaded = false;
   this.container = select('#canvas')
-
-  console.log(this.container.width, this.container.height)
   
   this.xAxisLabel = 'year';
   this.yAxisLabel = '℃';
