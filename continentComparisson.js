@@ -1,6 +1,5 @@
-
-comparissonBars();
-comparissonBars2('asia');
+comparissonBars()
+comparissonBars2('global')
 
 function comparissonBars() {
     const arr = [
@@ -27,7 +26,7 @@ function comparissonBars2(entity) {
     const url = './data/world-population/population-historic-global-continents-table.csv'
     const values = []
     const container = document.querySelector('#label')
-    const title = 'Label Population data';
+    const title = 'Global Population data';
 
     d3.csv(url)
     .then(function (data) {
@@ -71,3 +70,4 @@ function comparissonBars2(entity) {
     })
  
 }
+

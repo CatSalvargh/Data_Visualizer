@@ -1,6 +1,6 @@
 :root {
     --mainBg: rgb(63, 72, 120);
-    --accentText:  rgb(207, 110, 207);
+    --accentText:  rgb(80, 144, 182);
     --accentHover: rgba(187, 179, 11);
     --accentHoverLight: rgba(187, 179, 11, 0.6);
  }
@@ -85,7 +85,7 @@
      }
  }
  
- .wrapper, .menu-item, .showName, .showLabel, .labelClicked {
+ .wrapper, .menu-item, .showName, .showLabel, .labelClicked, .select-map-comp {
      box-shadow: -5px 6px 12px var(--accentHoverLight),
      5px 5px 20px rgba(0,0,0,0.8),
      inset 5px 5px 10px rgba(255, 255, 255, 0.3),
@@ -139,7 +139,7 @@
      height: 75vh;
  }
  
- .map-container .svg-container {
+ .map-container .svg-container, #cluster {
      position: absolute;
      top: 2.5rem;
      right: 2.5rem;
@@ -147,8 +147,8 @@
      height: 50%;
  }
  
- svg {
-     width: 100%;
+ .svgMap {
+     width: 90%;
      height: auto;
  /* 
      width="1009.6727"
@@ -191,11 +191,16 @@
  
  .noShow {
      opacity: 0;
+     /* display: none; */
      position: absolute;
      top: 26rem;
      left: 1rem;
  }
- 
+
+ .not-visible {
+    display: none;
+ }
+
  #label {
      width: 32%;
      height: 32%;
@@ -213,6 +218,7 @@
      
      align-self: flex-start;
      margin: 10px 15px 0 0;
+     box-shadow: none;
  }
 
  .userInput {
@@ -244,6 +250,23 @@
     font-size: 1.5em;
  }
 
+.cluster {
+    display: block;
+    margin: 0 auto;    
+    max-height: 50vh;
+    max-width: 50vh;
+ }
+
+.select-map-comp {
+    display: inline-flex;
+    max-height: 2em;
+    min-width: fit-content;
+    margin-right: 10px;
+    padding: 2px 5px;
+    color: lightgray;
+    font-size: 0.8rem;
+    box-shadow: none;
+}
 
 
  /* END CONTINENT COMPARISSON*/

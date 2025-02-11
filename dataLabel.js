@@ -12,10 +12,10 @@ let xAxisScale
 let yAxisScale
 
 const svg = d3.select('#label').append('svg').attr('id', 'map-label')
-const continentList = document.getElementById('wichContinent').options;
-const continents = ['Global', 'Africa', 'Americas', 'Asia', 'Europe', 'Oceania']
+// const continentList = document.getElementById('wichContinent').options;
+// const continents = ['Global', 'Africa', 'Americas', 'Asia', 'Europe', 'Oceania']
 
-continents.forEach(option => continentList.add(new Option(option)));
+// continents.forEach(option => continentList.add(new Option(option)));
 
 updateChart()
 drawChart('global')
@@ -151,11 +151,11 @@ const drawBars = (arr) => {
         })
 }
 
-function updateChart() {
-        const userInput = document.getElementById('wichContinent').value
-        const label = document.getElementById('label')
+// function updateChart() {
+//         const userInput = document.getElementById('wichContinent').value
+//         const label = document.getElementById('label')
 
-        d3.selectAll('rect').remove()
-        drawChart(userInput.toLowerCase())
-        label.classList.add('showLabel');
-}
+//         d3.selectAll('rect').remove()
+//         drawChart(userInput.toLowerCase())
+//         label.classList.add('showLabel');
+// }

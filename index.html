@@ -19,12 +19,13 @@
 
     <div class="dash-container grid">
 
-      <div class="map-container wrapper">
-        <label for="whichContinent" class="userInput">Select a continent: </label>
-        <select id="wichContinent" class="userInput"  type="select" placeholder="type a continent" value="global" onchange="updateChart()"></select>
+      <div id="mainVisualization" class="map-container wrapper">
+        <button class="select-map-comp" onclick="selectVisualization()">See interactive map</button>
+        <!-- <label for="whichContinent" class="userInput">Select a continent: </label>
+        <select id="wichContinent" class="userInput"  type="select" placeholder="type a continent" value="global" onchange="updateChart()"></select> -->
     
         <div id="name"></div>
-        <div class="svg-container">
+        <div class="svg-container not-visible">
         <?xml version="1.0" encoding="UTF-8" standalone="no"?>
         <!-- SVG MAP Created for MapSVG plugin: http://mapsvg.com -->
         <svg
@@ -37,6 +38,7 @@
           viewbox="0 0 1000 1000"
           width="250px"
           height="250px"
+          class="svgMap"
           >
           <!-- width="1009.6727"
           height="665.96301" -->
@@ -1067,12 +1069,12 @@
             id="ZW" />
         </svg>
         </div>
-
         <div id="label" class="noShow">
-          
         </svg>
-
         </div>
+          <div id="cluster">
+
+          </div>
       </div>
     
       <div class="col">
@@ -1434,6 +1436,7 @@
     <script src="D3-Chart-Constructor.js"></script>
     <!-- <script src="dataLabel.js"></script> -->
     <script src="continentComparisson.js"></script>
+    <script src="PopulationCluster.js"></script>
 
     <!-- Add extra scripts below -->
     
