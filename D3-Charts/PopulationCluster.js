@@ -1,11 +1,9 @@
 
-class Cluster {
+export default class Cluster {
 
     constructor() {
         this.container = document.querySelector('#cluster')
-        // this.height = 450;
-        // this.width = this.height;
-        this.height = this.container.clientHeight * 1.8
+        this.height = this.container.clientHeight * 1.85
         this.width = this.height;
         this.margin = 1
 
@@ -18,7 +16,7 @@ class Cluster {
         const color = d3.scaleLinear().domain([0, 50])
                         .range(["hsl(76, 75.50%, 80.80%)", "hsl(232, 31.1%, 33%)"])
                         .interpolate(d3.interpolateHcl);
-        let barColor = d3.scaleSequential(d3.interpolateRdYlBu).domain([130, 0])
+        let barColor = d3.scaleSequential(d3.interpolateRdYlBu).domain([200, 0])
 
         const self = this;
       
@@ -85,7 +83,6 @@ class Cluster {
                 }
             
                 function zoom(e, d) {
-                // const focus0 = focus;
             
                 focus = d;
             
@@ -108,22 +105,3 @@ class Cluster {
         })
     }
 }
-
-const cluster = new Cluster()
-
-function selectVisualization() {
-    const map =  document.querySelector('.svg-container');
-    const clusterS = document.getElementById('cluster');
-    const buttonHtml = document.querySelector('.select-map-comp')
-    const dataLabel = document.getElementById('label')
-
-    map.classList.toggle('not-visible')
-    clusterS.classList.toggle('not-visible')
-    dataLabel.classList.remove('labelClicked');
-
-    if (!map.classList.contains('not-visible')) {
-        buttonHtml.innerHTML = 'See interactive cluster'
-    } else {
-        buttonHtml.innerHTML = 'See interactive map'
-    }
-  }

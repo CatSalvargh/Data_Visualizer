@@ -4,18 +4,18 @@ function PayGapTimeSeries() {
   this.id = 'pay-gap-timeseries';
   this.loaded = false;
 
-  this.title = 'Gender Pay Gap: Average difference between male and female pay.'
+  this.title = 'Gender Pay Gap: Average difference between male and female pay'
 
   this.xAxisLabel = 'year';
-  this.yAxisLabel = '%';
+  this.yAxisLabel = '% difference';
 
-  var marginSize = 35;
+  var marginSize = 40;
 
   this.layout = {
       marginSize: marginSize,
       leftMargin: marginSize * 2,
       rightMargin: width - marginSize,
-      topMargin: marginSize,
+      topMargin: marginSize *1.1,
       bottomMargin: height - marginSize * 2,
       pad: 5,
 
@@ -61,7 +61,7 @@ function PayGapTimeSeries() {
       return;
     }
 
-    this.drawTitle(); // Draw the title above the plot.
+    this.drawTitle();
 
     // Draw all y-axis labels. helper func
     drawYAxisTickLabels(this.minPayGap,
@@ -93,8 +93,8 @@ function PayGapTimeSeries() {
       };
 
       if (previous != null) {
-        // Draw line segment connecting previous year to current
-        stroke(0);
+        stroke(255, 30, 0);
+        strokeWeight(3);
         line(
           this.mapYearToWidth(previous.year), this.mapPayGapToHeight(previous.payGap),
           this.mapYearToWidth(current.year), this.mapPayGapToHeight(current.payGap)
@@ -103,7 +103,6 @@ function PayGapTimeSeries() {
         // The number of x-axis labels to skip so that only numXTickLabels are drawn.
         var xLabelSkip = ceil(numYears / this.layout.numXTickLabels);
 
-        // Draw the tick label marking the start of the previous year.
         if (i % xLabelSkip == 0) {
           drawXAxisTickLabel(previous.year, this.layout,
                              this.mapYearToWidth.bind(this));
@@ -114,13 +113,13 @@ function PayGapTimeSeries() {
   };
 
   this.drawTitle = function() {
-    fill(0);
+    fill(220);
     noStroke();
     textAlign('center', 'center');
 
     text(this.title,
          (this.layout.plotWidth() / 2) + this.layout.leftMargin,
-         this.layout.topMargin - (this.layout.marginSize / 2));
+         this.layout.topMargin - (this.layout.marginSize * 0.8));
   };
 
   this.mapYearToWidth = function(value) {
@@ -133,10 +132,10 @@ function PayGapTimeSeries() {
 
   this.mapPayGapToHeight = function(value) {
     return map(value, 
-      this.minPayGap,
-      this.maxPayGap,
-      this.layout.bottomMargin,
-      this.layout.topMargin
-    )
+              this.minPayGap,
+              this.maxPayGap,
+              this.layout.bottomMargin,
+              this.layout.topMargin
+            )
   };
 }

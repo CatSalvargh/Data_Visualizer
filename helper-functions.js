@@ -1,3 +1,6 @@
+// D3 =====
+
+
 
 //==============  Data processing helper functions.================
 function sum(data) {
@@ -51,12 +54,12 @@ function drawAxis(layout, colour=0) {
 }
 
 function drawAxisLabels(xLabel, yLabel, layout) {
-  fill(245);
+  fill(220);
   noStroke();
   textAlign('center', 'center');
   
   push()
-  textSize(25);
+  textSize(17);
   text(xLabel,
        (layout.plotWidth() / 2) + layout.leftMargin,
        layout.bottomMargin + (layout.marginSize * 1.5));
@@ -82,13 +85,12 @@ function drawYAxisTickLabels(min, max, layout, mapFunction, decimalPlaces) {
     var value = min + (i * yTickStep);
     var y = mapFunction(value);
 
-    // Add tick label.
+    noStroke();
     text(value.toFixed(decimalPlaces),
          layout.leftMargin - layout.pad,
          y);
 
     if (layout.grid) {
-      // Add grid line.
       strokeWeight(0.5)
       stroke(220);
       line(layout.leftMargin, y, layout.rightMargin, y);

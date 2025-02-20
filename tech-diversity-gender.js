@@ -25,16 +25,16 @@ function TechDiversityGender() {
   this.maleColour = color(108, 143, 239);
 
   this.preload = function() {
-    var self = this;
-    this.data = loadTable(
-      './data/tech-diversity/gender-2018.csv', 'csv', 'header',
-      function(table) {
-        self.loaded = true;
-      });
+      var self = this;
+      this.data = loadTable(
+        './data/tech-diversity/gender-2018.csv', 'csv', 'header',
+        function(table) {
+          self.loaded = true;
+        });
   };
 
   this.setup = function() {
-    textSize(16);
+      textSize(16);
   };
 
   this.destroy = function() {
@@ -67,8 +67,8 @@ function TechDiversityGender() {
         text(company.name,
             this.layout.leftMargin - this.layout.pad,
             lineY);
-
-        stroke(0)
+        pop();
+        
         fill(this.femaleColour);
         rect(this.layout.leftMargin,
             lineY,
@@ -89,31 +89,31 @@ function TechDiversityGender() {
           this.layout.topMargin,
           this.midX,
           this.layout.bottomMargin);
-    };
+  };
 
   this.drawCategoryLabels = function() {
-    fill(245);
-    noStroke();
-    textSize(18);
-    textAlign('left', 'top');
-    text('Female',
-        this.layout.leftMargin,
-        this.layout.pad+5);
-    textAlign('center', 'top');
-    text('50%',
-        this.midX,
-        this.layout.pad+5);
-    textAlign('right', 'top');
-    text('Male',
-        this.layout.rightMargin,
-        this.layout.pad+5);
+      fill(245);
+      noStroke();
+      textSize(18);
+      textAlign('left', 'top');
+      text('Female',
+          this.layout.leftMargin,
+          this.layout.pad+5);
+      textAlign('center', 'top');
+      text('50%',
+          this.midX,
+          this.layout.pad+5);
+      textAlign('right', 'top');
+      text('Male',
+          this.layout.rightMargin,
+          this.layout.pad+5);
   };
 
   this.mapPercentToWidth = function(percent) {
-    return map(percent,
-              0,
-              100,
-              0,
-              this.layout.plotWidth());
+      return map(percent,
+                0,
+                100,
+                0,
+                this.layout.plotWidth());
   };
 }
