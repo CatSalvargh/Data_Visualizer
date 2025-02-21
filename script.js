@@ -8,7 +8,7 @@ import  CountryLabel from './D3-Charts/D3-Country-Label-Constructor.js'
 
 // let getFrame;
 let country;
-let delay = 1500;
+let delay = 1670;
 render('global')
 
 eventhandler()

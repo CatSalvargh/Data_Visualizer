@@ -3,18 +3,16 @@ export default class CountryLabel {
     constructor(title, entityID) {
         this.container = document.getElementById('mainVisualization')
         this.title = title
-        this.svg = d3.select(this.container).append('svg');
-        this.id = entityID;
+        this.id = entityID;       
     }
 
     draw() {
-        console.log(this.id2)
+        this.svg = d3.select(this.container).append('svg')
         this.width = this.container.offsetWidth * 0.25
         this.height = this.container.offsetHeight * 0.5;
         this.padding = this.width * 0.075;
 
         const svg = this.svg
-
         d3.json("./data/data.json").then((data) => {
             const cleanData = data.map(function(d) {
                 return {
@@ -50,8 +48,12 @@ export default class CountryLabel {
             .attr('y', this.padding *2)
             .style('fill', 'white')
 
+     
+
             const countryheaders = svg.append('g')
+                                        .attr('class', 'dataToClean')
             const countrydetails = svg.append('g')
+                                        .attr('class', 'dataToClean')
             
             countryheaders.selectAll('text')
                         .data(this.keys)
@@ -76,17 +78,20 @@ export default class CountryLabel {
                             .style('font-weight', '300')    
   
             const flag = svg.append("svg:image")
+                            .attr('class', 'dataToClean')
                 
             flag.attr('xlink:href', this.flag)
                 .attr('x', this.padding)
                 .attr('y', this.padding + 200)
                 .attr('width', '4vw')
                 .attr('height', '4vh')
-    })
+        })
+
+        this.clean()
     }
 
     clean() {
-        d3.select(this.svg).remove()
+        d3.selectAll('.dataToClean').remove();
     }
 }
     
