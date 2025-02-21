@@ -19,11 +19,10 @@ export default class CountryLabel {
                     Code: d.alpha2Code,
                     Name: d.name, Capital: d.capital, 
                     Region: d.region,
-                    Population: d3.format(',')(d.population),
                     "Area (Km 2)": d3.format(',')(d.area),
+                    Population: d3.format(',')(d.population),
                     flag: d.flag
                 }
-           
             })
             cleanData.forEach(d => {
 
@@ -71,7 +70,7 @@ export default class CountryLabel {
                         .enter()
                         .append('text')
                         .text(d => d)
-                           .attr('x', this.padding + 150)
+                           .attr('x', this.padding + this.width * 0.45)
                             .attr('y', (d, i) => {return (this.padding * 4) + (i * 20)})
                             .style('fill', 'lightgray')
                             .style('font-size', '0.75rem')
