@@ -3,6 +3,7 @@ const nameLabel = document.getElementById('name');
 const dataLabel = document.getElementById('label')
 
 export let pathName; // Global, used by script
+export let pathId; // Global, used by script
 export let slowTimer = true;
 
 export function eventhandler() {paths.forEach(path => {
@@ -14,7 +15,8 @@ export function eventhandler() {paths.forEach(path => {
             nameLabel.classList.add('showName');
             dataLabel.classList.toggle('showLabel');
             pathName = e.getAttribute('title')
-            
+            pathId = e.getAttribute('id')
+
             //add label to mouse position
             e.addEventListener('mousemove', event => {
                 nameLabel.innerHTML = e.attributes[1].value;

@@ -87,7 +87,7 @@
      }
  }
  
- .wrapper, .menu-item, .showName, .showLabel, .labelClicked, .select-map-comp {
+ .wrapper, .menu-item, .showName, .showLabel, .labelClicked, .select-map-comp, #countryInfo {
      box-shadow: -5px 6px 12px var(--accentHoverLight),
      5px 5px 20px rgba(0,0,0,0.8),
      inset 5px 5px 10px rgba(255, 255, 255, 0.3),
@@ -277,7 +277,10 @@
  }
 
 .select-map-comp {
-    display: inline-flex;
+    display: block;
+    position: relative;
+    top: 2.5rem;
+    right: 2.5rem;
     max-height: 2em;
     min-width: fit-content;
     margin-right: 10px;
@@ -285,6 +288,13 @@
     color: lightgray;
     font-size: 0.8rem;
     box-shadow: none;
+}
+
+#countryInfo {
+    display: block;
+    position: absolute;
+    top: 3.5rem;
+    right: 2.5rem;
 }
 
 

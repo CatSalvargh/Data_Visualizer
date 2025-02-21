@@ -1,15 +1,14 @@
-// import { selectVisualization } from './support/supportFunctions.js'
-// import { selectMain, clusterMain as cluster } from './support/globalVariables.js'
+
 import Cluster from './D3-Charts/PopulationCluster.js'
 import { barData, retrieveData } from './D3-Charts/continentComparisson.js'
 import ChartD3 from './D3-Charts/D3-Chart-Constructor.js'
 import CircleChartD3 from './D3-Charts/D3-Circle-Constructor.js'
-// import { barChart, values } from './D3-Charts/d3BarChartData.js'
-import { pathName, eventhandler, selectVisualization, slowTimer } from './svg-Map.js'
+import { pathName, pathId, eventhandler, selectVisualization, slowTimer } from './svg-Map.js'
+import  CountryLabel from './D3-Charts/D3-Country-Label-Constructor.js' 
 
 // let getFrame;
 let country;
-let delay = 1670;
+let delay = 1500;
 render('global')
 
 eventhandler()
@@ -22,16 +21,15 @@ window.buttonClick = () => {
                 delay = 835
             }
         })
-        console.log(delay)
 }
 
 const intervalID = setInterval(() => {intervalfunc() }, delay);
 
 function intervalfunc() {
     if(!pathName){
-        country = 'World'
+        country = {country: 'World', pathId: 'WD'}
     } else {
-        country = pathName
+        country = {country: pathName, id: pathId}
     }
 
     render(country)
@@ -43,7 +41,7 @@ function intervalfunc() {
 
 
 function render(entity) {
-            
+            let selectedCcountry = entity
             const SecondaryCont = document.querySelector('#continentComparisson')
             const labelcontainer = document.querySelector('#label')
             const dropdown = ['Global', 'Africa', 'Americas', 'Asia', 'Europe', 'Oceania']
@@ -52,7 +50,6 @@ function render(entity) {
 
             d3.json('https://countriesnow.space/api/v0.1/countries/population')
             .then((d) => {
-                let selectedCcountry = entity
                 const APIData = d.data
                 let countryData;
                 let globalData;
@@ -64,7 +61,7 @@ function render(entity) {
                         globalData.domain = 8
                     }
                
-                    if(item.country == selectedCcountry) {
+                    if(item.country == selectedCcountry.country) {
                         countryData = item; 
                     }
                 })  
@@ -90,6 +87,11 @@ function render(entity) {
                 chart.generateAxis();
                 chart.drawBars();
             })
+
+            console.log(entity.id)
+            const countryInfo = new CountryLabel('Country Info', entity.id)
+            countryInfo.draw()
+
 }
 
 new Cluster()
@@ -97,5 +99,23 @@ new Cluster()
 
 
 
+async function getCountryData() {
+    try {
+    const response = await d3.json("./data/data.json")
+    console.log(response)
+
+
+
+
+
+
+
+    } catch(error) {
+            console.error('Something Bad happened:', error.message)
+        }
+
+        
+      //data surce: https://github.com/DovAzencot/ApiCountries/blob/main/data.json
+  }
 
 

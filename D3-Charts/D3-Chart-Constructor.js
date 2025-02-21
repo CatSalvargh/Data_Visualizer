@@ -10,7 +10,6 @@ export default class ChartD3 {
     }
 
     draw() {
-        console.log(this.data)
         this.width = this.container.offsetWidth * this.sizeFactor
         this.height = this.container.offsetHeight
         this.padding = this.height * 0.1;
