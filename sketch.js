@@ -10,13 +10,13 @@ function setup() {
 
     gallery.setUpCanvas();
 
-    defaulty = new PayGapByJob2017();
+    defaulty = new TechDiversityRace();
     
     gallery.addVisual(new WorldPopHistoric());
-    gallery.addVisual(new TechDiversityRace());
+    // gallery.addVisual(new TechDiversityRace());
     gallery.addVisual(new TechDiversityGender());
     gallery.addVisual(defaulty);
-    // gallery.addVisual(new PayGapByJob2017());
+    gallery.addVisual(new PayGapByJob2017());
     gallery.addVisual(new PayGapTimeSeries());
     gallery.addVisual(new ClimateChange());
 }
@@ -24,6 +24,7 @@ function setup() {
 function draw() {
     
     if (gallery.selectedVisual == null) {
+        defaulty.setup();
         defaulty.draw();
     }
 

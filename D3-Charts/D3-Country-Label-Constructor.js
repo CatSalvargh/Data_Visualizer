@@ -70,7 +70,7 @@ export default class CountryLabel {
                         .enter()
                         .append('text')
                         .text(d => d)
-                           .attr('x', this.padding + this.width * 0.45)
+                           .attr('x', this.padding + this.width * 0.35)
                             .attr('y', (d, i) => {return (this.padding * 4) + (i * 20)})
                             .style('fill', 'lightgray')
                             .style('font-size', '0.75rem')

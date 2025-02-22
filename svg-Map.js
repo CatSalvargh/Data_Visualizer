@@ -23,7 +23,7 @@ export function eventhandler() {paths.forEach(path => {
                 let size = nameLabel.id
                 let x = event.clientX
                 let y = event.clientY
-                nameLabel.style.top = y - 170 + "px";
+                nameLabel.style.top = y - 140 + "px";
                 nameLabel.style.left = x + 20 +"px";
             })
         });
@@ -60,5 +60,6 @@ export function selectVisualization() {
     } else {
         buttonHtml.innerHTML = 'See interactive map'
         slowTimer = true;
+        // document.getElementById('countryInfo').classList.add('not-visible')
     }
   }

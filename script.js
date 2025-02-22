@@ -5,25 +5,29 @@ import ChartD3 from './D3-Charts/D3-Chart-Constructor.js'
 import CircleChartD3 from './D3-Charts/D3-Circle-Constructor.js'
 import { pathName, pathId, eventhandler, selectVisualization, slowTimer } from './svg-Map.js'
 import  CountryLabel from './D3-Charts/D3-Country-Label-Constructor.js' 
+import AnimatedCircle from './D3-Charts/D3-Circle-Animated-Constructor.js'
 
-// let getFrame;
 let country;
-let delay = 1670;
-render('global')
+let interval
+let delay = 1670
+const mapActive = false;
+const map = document.querySelector('.svg-container')
 
+render('global')
 eventhandler()
 
 window.buttonClick = () => {
     import('./svg-Map.js').then(
         ({pathName, selectVisualization, slowTimer}) => {
             selectVisualization()
-            if (!slowTimer) {
-                delay = 835
+            if (!map.classList.contains('not-visible') && !mapActive) {
+                interval = setInterval(() => {intervalfunc() }, delay)
+            }else {
+                clearInterval(interval)
             }
-        })
+            mapActive = !mapActive;
+    })
 }
-
-const intervalID = setInterval(() => {intervalfunc() }, delay);
 
 function intervalfunc() {
     if(!pathName){
@@ -32,11 +36,12 @@ function intervalfunc() {
         country = {country: pathName, id: pathId}
     }
 
+    console.log('interval running')
     render(country)
     }
 
 // if (!mapActive) {
-//     clearInterval(getFrame)
+//     
 // }
 
 
@@ -88,15 +93,15 @@ function render(entity) {
                 chart.drawBars();
             })
 
-            console.log(entity.id)
-            const countryInfo = new CountryLabel('Country Info', entity.id)
+            // ESTO ESTA BIEN, COMENTA Y DESCOMENTALO
+            const countryInfo = new CountryLabel('Country Info', entity.id) 
             countryInfo.draw()
+
 
 }
 
 new Cluster()
-
-
+const circles = new AnimatedCircle()
 
 
 async function getCountryData() {
