@@ -92,6 +92,9 @@ export default class CountryLabel {
     clean() {
         d3.selectAll('.dataToClean').remove();
     }
+    reset() {
+        d3.select(this.svg).remove();
+    }
 }
     
 //data surce: https://github.com/DovAzencot/ApiCountries/blob/main/data.json

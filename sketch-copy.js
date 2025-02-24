@@ -16,7 +16,7 @@ function setup() {
     // gallery.addVisual(new TechDiversityRace());
     gallery.addVisual(new TechDiversityGender());
     gallery.addVisual(defaulty);
-    gallery.addVisual(new PayGapByJob2017());
+    // gallery.addVisual(new PayGapByJob2017());
     gallery.addVisual(new PayGapTimeSeries());
     gallery.addVisual(new ClimateChange());
 }

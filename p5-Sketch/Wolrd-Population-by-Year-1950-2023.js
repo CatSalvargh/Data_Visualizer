@@ -1,40 +1,46 @@
-function WorldPopHistoric() {
+export default class  WorldPopHistoric {
+    
+  constructor (p5, w, h) {
 
-  this.name = 'World Population 1950-2023';
-  this.id = 'Global_world_Population_historic';
-  this.loaded = false;
+      this.name = 'World Population 1950-2023';
+      this.id = 'Global_world_Population_historic';
+      this.loaded = false;
 
-  this.title = 'World Population 1950 to 2023'; 
+      this.title = 'World Population 1950 to 2023'; 
 
-  this.xAxisLabel = 'Year';
-  this.yAxisLabel = 'Billions';
+      this.p = p5
 
-  var marginSize = 30;
+      this.xAxisLabel = 'Year';
+      this.yAxisLabel = 'Billions';
 
-  this.layout = {
-      marginSize: marginSize,
-      leftMargin: marginSize * 3,
-      rightMargin: width - marginSize,
-      topMargin: marginSize * 1.2,
-      bottomMargin: height - marginSize * 2,
-      pad: 5,
+      var marginSize = 30;
 
-      plotWidth: function() {
-        return this.rightMargin - this.leftMargin;
-      },
+      this.layout = {
+        marginSize: marginSize,
+        leftMargin: marginSize * 3,
+        rightMargin: w - marginSize,
+        topMargin: marginSize * 1.2,
+        bottomMargin: h - marginSize * 2,
+        pad: 5,
+  
+        plotWidth: function() {
+          return this.rightMargin - this.leftMargin;
+        },
+  
+        plotHeight: function() {
+          return this.bottomMargin - this.topMargin;
+        },
+  
+        grid: true,
+        numXTickLabels: 15,
+        numYTickLabels: 8,
+    };
 
-      plotHeight: function() {
-        return this.bottomMargin - this.topMargin;
-      },
+  }
 
-      grid: true,
-      numXTickLabels: 15,
-      numYTickLabels: 8,
-  };
-
-  this.preload = function() {
-    var self = this;
-    this.data = loadTable(
+ preload(p5) {
+  const self = this;
+    this.data = p5.loadTable(
       '/data/world-population/population-historic-global-continents.csv', 'csv', 'header',
       function(table) {
         self.loaded = true;
@@ -42,18 +48,18 @@ function WorldPopHistoric() {
 
   };
 
-  this.setup = function() {
-      textSize(12);
+ setup(p5) {
+      p5.textSize(12);
       this.startYear = this.data.getString(0, 'year');
       this.endYear = this.data.getNum(this.data.getRowCount() - 1, 'year');
       this.minPopulation = 0; 
-      this.maxPopulation = max(this.data.getColumn('population'));
+      this.maxPopulation = p5.max(this.data.getColumn('population'));
   };
 
-  this.destroy = function() {
+ destroy() {
   };
 
-  this.draw = function() {
+ draw(p5) {
       if (!this.loaded) {
         console.log('Data not yet loaded');
         return;
@@ -83,9 +89,9 @@ function WorldPopHistoric() {
         };
 
         if (previous != null) {
-          stroke('gold');
-          strokeWeight(4)
-          line(
+          p5.stroke('gold');
+          p5.strokeWeight(4)
+          p5.line(
             this.mapYearToWidth(previous.year), this.mapPopulationToHeight(previous.Population),
             this.mapYearToWidth(current.year), this.mapPopulationToHeight(current.Population)
           );
@@ -93,10 +99,10 @@ function WorldPopHistoric() {
           var xLabelSkip = ceil(int(numYears / this.layout.numXTickLabels));
 
           if (i % xLabelSkip == 0) {
-            strokeWeight(1)
+            p5.strokeWeight(1)
             drawXAxisTickLabel(previous.year, this.layout,
                               this.mapYearToWidth.bind(this));
-            ellipse(this.mapYearToWidth(previous.year), this.mapPopulationToHeight(previous.Population), 7, 7);
+            p5.ellipse(this.mapYearToWidth(previous.year), this.mapPopulationToHeight(previous.Population), 7, 7);
 
             this.dataToolTip(this.mapYearToWidth(previous.year), this.mapPopulationToHeight(previous.Population), current)
           }
@@ -106,30 +112,30 @@ function WorldPopHistoric() {
       }
   };
 
-  this.drawTitle = function() {
-      fill(245);
-      noStroke();
-      textAlign('center', 'center');
+ drawTitle() {
+  p5.fill(245);
+  p5.noStroke();
+  p5.textAlign('center', 'center');
       
-      push();
-      textSize(16);
+  p5.push();
+  p5.textSize(16);
 
-      text(this.title,
+  p5.text(this.title,
           (this.layout.plotWidth() / 2) + (this.layout.leftMargin * 0.75),
           this.layout.topMargin - (this.layout.marginSize * 0.75));
-      pop();
+          p5.pop();
     };
 
-    this.mapYearToWidth = function(value) {
-      return map(value,
+   mapYearToWidth(value) {
+      return p5.map(value,
                 this.startYear,
                 this.endYear,
                 this.layout.leftMargin,   // Draw left-to-right from margin.
                 this.layout.rightMargin);
     };
 
-    this.mapPopulationToHeight = function(value) {
-      return map(value, 
+   mapPopulationToHeight(value) {
+      return p5.map(value, 
         this.minPopulation,
         this.maxPopulation,
         this.layout.bottomMargin,
@@ -137,20 +143,20 @@ function WorldPopHistoric() {
       )
   };
 
-  this.dataToolTip = function(x, y, data){
+ dataToolTip(x, y, data){
       let mouseDist = dist(x, y, mouseX, mouseY);
       if (mouseDist < 20) {
-        push();
-        fill(64, 76, 145, 100);
-        stroke(0);
-        rect(mouseX-150, mouseY, 180, 70, 10)
-        fill(207, 110, 207);
-        stroke(64, 76, 145);
-        strokeWeight(4);
-        textSize(15);
-        textAlign('CENTER');
-        text(`\n\nYear: ${data.year}, \n Population: ${data.Population.toFixed(2)} Billion`, mouseX - 60, mouseY +15)
-        pop();
+        p5.push();
+        p5.fill(64, 76, 145, 100);
+        p5.stroke(0);
+        p5.rect(mouseX-150, mouseY, 180, 70, 10)
+        p5.fill(207, 110, 207);
+        p5.stroke(64, 76, 145);
+        p5.strokeWeight(4);
+        p5.textSize(15);
+        p5.textAlign('CENTER');
+        p5.text(`\n\nYear: ${data.year}, \n Population: ${data.Population.toFixed(2)} Billion`, mouseX - 60, mouseY +15)
+        p5.pop();
       }
   }
 

@@ -1,9 +1,6 @@
-// D3 =====
-
-
 
 //==============  Data processing helper functions.================
-function sum(data) {
+export function sum(data) {
     var total = 0;
     // Ensure that data contains numbers and not strings.
     data = stringsToNumbers(data);
@@ -13,12 +10,12 @@ function sum(data) {
     return total;
 }
 
-function mean(data) {
+export function mean(data) {
     var total = sum(data);
     return total / data.length;
 }
 
-function sliceRowNumbers (row, start=0, end) {
+export function sliceRowNumbers (row, start=0, end) {
     var rowData = [];
     if (!end) {
       // Parse all values until the end of the row.
@@ -30,14 +27,14 @@ function sliceRowNumbers (row, start=0, end) {
     return rowData;
 }
 
-function stringsToNumbers (array) {
+export function stringsToNumbers (array) {
     return array.map(Number);
 }
 
 //============== Plotting helper functions============== 
 
 
-function drawAxis(layout, colour=0) {
+export function drawAxis(layout, colour=0) {
   stroke(color(colour));
 
   // x-axis
@@ -53,7 +50,7 @@ function drawAxis(layout, colour=0) {
        layout.bottomMargin);
 }
 
-function drawAxisLabels(xLabel, yLabel, layout) {
+export function drawAxisLabels(xLabel, yLabel, layout) {
   fill(220);
   noStroke();
   textAlign('center', 'center');
@@ -71,7 +68,7 @@ function drawAxisLabels(xLabel, yLabel, layout) {
   pop();
 }
 
-function drawYAxisTickLabels(min, max, layout, mapFunction, decimalPlaces) {
+export function drawYAxisTickLabels(min, max, layout, mapFunction, decimalPlaces) {
   // Map function must be passed with .bind(this).
   var range = max - min;
   var yTickStep = range / layout.numYTickLabels;
@@ -98,7 +95,7 @@ function drawYAxisTickLabels(min, max, layout, mapFunction, decimalPlaces) {
   }
 }
 
-function drawXAxisTickLabel(value, layout, mapFunction) {
+export function drawXAxisTickLabel(value, layout, mapFunction) {
   // Map function must be passed with .bind(this).
   var x = mapFunction(value);
 

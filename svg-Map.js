@@ -4,7 +4,6 @@ const dataLabel = document.getElementById('label')
 
 export let pathName; // Global, used by script
 export let pathId; // Global, used by script
-export let slowTimer = true;
 
 export function eventhandler() {paths.forEach(path => {
     path.classList.add('paths') });
@@ -34,7 +33,6 @@ export function eventhandler() {paths.forEach(path => {
             nameLabel.classList.add();
             nameLabel.innerHTML = "";
             dataLabel.classList.remove('showLabel');
-            // dataLabel.classList.add('noShow');
         });
 
         e.addEventListener('click', function() {
@@ -55,11 +53,8 @@ export function selectVisualization() {
     dataLabel.classList.remove('labelClicked');
       
     if (!map.classList.contains('not-visible')) {
-        slowTimer = false;
         buttonHtml.innerHTML = 'See zoomable cluster'
     } else {
-        buttonHtml.innerHTML = 'See interactive map'
-        slowTimer = true;
-        // document.getElementById('countryInfo').classList.add('not-visible')
+        buttonHtml.innerHTML = 'See interactive map'       
     }
   }

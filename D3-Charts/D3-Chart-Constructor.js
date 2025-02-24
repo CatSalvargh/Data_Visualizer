@@ -71,7 +71,7 @@ export default class ChartD3 {
                 .append('text')
                     .text('Billions')
                     .attr('transform', 'rotate(-90)')
-                    .attr('x', - height / 4)
+                    .attr('x', - this.height / 4)
                     .attr('y', - this.padding * 0.85)
                     .style('fill', 'lightGray')
                     .style('font-size', '0.85rem')

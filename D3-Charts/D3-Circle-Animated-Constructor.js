@@ -37,8 +37,7 @@ export default class AnimatedCircle {
                             }
                         })
                 
-                        console.log(data)
-                    const color = d3.scaleSequential(d3.interpolateCool).domain([-3, 5])
+                     const color = d3.scaleSequential(d3.interpolateCool).domain([-3, 5])
                     const random = d3.randomUniform(0.5, 1)
 
                     const circles = svg.selectAll('g')

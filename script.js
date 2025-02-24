@@ -2,32 +2,36 @@
 import Cluster from './D3-Charts/PopulationCluster.js'
 import { barData, retrieveData } from './D3-Charts/continentComparisson.js'
 import ChartD3 from './D3-Charts/D3-Chart-Constructor.js'
-import CircleChartD3 from './D3-Charts/D3-Circle-Constructor.js'
-import { pathName, pathId, eventhandler, selectVisualization, slowTimer } from './svg-Map.js'
+import { pathName, pathId, eventhandler, selectVisualization } from './svg-Map.js'
 import  CountryLabel from './D3-Charts/D3-Country-Label-Constructor.js' 
 import AnimatedCircle from './D3-Charts/D3-Circle-Animated-Constructor.js'
 
 let country;
 let interval
 let delay = 1670
-const mapActive = false;
+let mapActive = false;
 const map = document.querySelector('.svg-container')
+let countryInfo;
 
 render('global')
 eventhandler()
 
 window.buttonClick = () => {
     import('./svg-Map.js').then(
-        ({pathName, selectVisualization, slowTimer}) => {
+        ({pathName, selectVisualization }) => {
             selectVisualization()
             if (!map.classList.contains('not-visible') && !mapActive) {
                 interval = setInterval(() => {intervalfunc() }, delay)
+                mapActive = true;
             }else {
                 clearInterval(interval)
+                mapActive = !mapActive;
             }
-            mapActive = !mapActive;
     })
+    
 }
+
+
 
 function intervalfunc() {
     if(!pathName){
@@ -40,13 +44,10 @@ function intervalfunc() {
     render(country)
     }
 
-// if (!mapActive) {
-//     
-// }
-
-
 function render(entity) {
-            let selectedCcountry = entity
+    console.log(mapActive)
+
+           let selectedCcountry = entity
             const SecondaryCont = document.querySelector('#continentComparisson')
             const labelcontainer = document.querySelector('#label')
             const dropdown = ['Global', 'Africa', 'Americas', 'Asia', 'Europe', 'Oceania']
@@ -94,10 +95,8 @@ function render(entity) {
             })
 
             // ESTO ESTA BIEN, COMENTA Y DESCOMENTALO
-            const countryInfo = new CountryLabel('Country Info', entity.id) 
+            countryInfo = new CountryLabel('Country Info', entity.id) 
             countryInfo.draw()
-
-
 }
 
 new Cluster()
