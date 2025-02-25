@@ -1,7 +1,7 @@
 
 //==============  Data processing helper functions.================
-export function sum(data) {
-    var total = 0;
+export function sum(data, stringsToNumbers) {
+    var total = 0;  
     // Ensure that data contains numbers and not strings.
     data = stringsToNumbers(data);
     for (let i = 0; i < data.length; i++) {
@@ -21,7 +21,7 @@ export function sliceRowNumbers (row, start=0, end) {
       // Parse all values until the end of the row.
       end = row.arr.length;
     }
-    for (i = start; i < end; i++) {
+    for (let i = start; i < end; i++) {
       rowData.push(row.getNum(i));
     }
     return rowData;
@@ -34,85 +34,85 @@ export function stringsToNumbers (array) {
 //============== Plotting helper functions============== 
 
 
-export function drawAxis(layout, colour=0) {
-  stroke(color(colour));
+export function drawAxis(p5, layout) {
+  p5.stroke(0);
 
   // x-axis
-  line(layout.leftMargin,
+  p5.line(layout.leftMargin,
        layout.bottomMargin,
        layout.rightMargin,
        layout.bottomMargin);
 
   // y-axis
-  line(layout.leftMargin,
+  p5.line(layout.leftMargin,
        layout.topMargin,
        layout.leftMargin,
        layout.bottomMargin);
 }
 
-export function drawAxisLabels(xLabel, yLabel, layout) {
-  fill(220);
-  noStroke();
-  textAlign('center', 'center');
+export function AxisLabels(p5, xLabel, yLabel, layout) {
+  p5.fill(220);
+  p5.noStroke();
+  p5.textAlign('center', 'center');
   
-  push()
-  textSize(17);
-  text(xLabel,
+  p5.push()
+  p5.textSize(17);
+  p5.text(xLabel,
        (layout.plotWidth() / 2) + layout.leftMargin,
        layout.bottomMargin + (layout.marginSize * 1.5));
 
-  translate(layout.leftMargin - (layout.marginSize * 1.5),
-            layout.bottomMargin / 2);
-  rotate(- PI / 2);
-  text(yLabel, 0, 0);
-  pop();
+  p5.translate(layout.leftMargin - (layout.marginSize * 1.5),
+      layout.bottomMargin / 2);
+  p5.rotate(- p5.PI / 2);
+  p5.text(yLabel, 0, 0);
+  p5.pop();
 }
 
-export function drawYAxisTickLabels(min, max, layout, mapFunction, decimalPlaces) {
+export function yTickLabel(p5, min, max, layout, mapFunction, decimalPlaces) {
   // Map function must be passed with .bind(this).
   var range = max - min;
   var yTickStep = range / layout.numYTickLabels;
 
-  fill(0);
-  noStroke();
-  textAlign('right', 'center');
+  p5.fill(0);
+  p5.noStroke();
+  p5.textAlign('right', 'center');
 
   // Draw all axis tick labels and grid lines.
-  for (i = 0; i <= layout.numYTickLabels; i++) {
+  for (let i = 0; i <= layout.numYTickLabels; i++) {
     var value = min + (i * yTickStep);
     var y = mapFunction(value);
 
-    noStroke();
-    text(value.toFixed(decimalPlaces),
+    p5.noStroke();
+    p5.text(value.toFixed(decimalPlaces),
          layout.leftMargin - layout.pad,
          y);
 
     if (layout.grid) {
-      strokeWeight(0.5)
-      stroke(220);
-      line(layout.leftMargin, y, layout.rightMargin, y);
+      p5.strokeWeight(0.5)
+      p5.stroke(220);
+      p5.line(layout.leftMargin, y, layout.rightMargin, y);
     }
   }
 }
 
-export function drawXAxisTickLabel(value, layout, mapFunction) {
+export function xTickLabel(p5, value, layout, mapFunction) {
   // Map function must be passed with .bind(this).
   var x = mapFunction(value);
 
-  fill(0);
-  noStroke();
-  textAlign('center', 'center');
+  p5.fill(0);
+  p5.noStroke();
+  p5.textAlign('center', 'center');
 
   // Add tick label.
-  text(value,
+  p5.text(value,
        x,
        layout.bottomMargin + layout.marginSize / 2);
 
   if (layout.grid) {
     // Add grid line.
-    strokeWeight(0.5)
-    stroke(220);
-    line(x,
+    p5.strokeWeight(0.5)
+    p5.stroke(220);
+    p5.line(x,
          layout.topMargin,
          x,
          layout.bottomMargin);

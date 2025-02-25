@@ -8,9 +8,12 @@ export default class PayGapByJob2017 {
           this.dotSizeMin = 15;
           this.dotSizeMax = 40;
           this.p = p;
+          const p5 = p;
           this.stringsToNum = stN;
           this.width = w;
           this.height = h;
+
+          this.preload(p5)
     }
 
       preload(p5) {
@@ -58,7 +61,7 @@ export default class PayGapByJob2017 {
       const numJobsMax = p5.max(numJobs);
 
       p5.fill(255);
-      p5.stroke(100);
+      p5.stroke(25);
       p5.strokeWeight(0.5);
 
       for (let i = 0; i < this.data.getRowCount(); i++) {
@@ -92,16 +95,24 @@ export default class PayGapByJob2017 {
     };
 
     addAxes(p5) {
-      p5.stroke(200);
-      p5.line(this.width / 2, 0 + this.pad, this.width / 2, this.height - this.pad); // vertical
-      p5.line(0 + this.pad * 3, this.height / 2, this.width - this.pad, this.height / 2); //horizontal
-      p5.textSize(14) 
-      p5.fill(180);
-      p5.noStroke();
-      p5.text('Higher Male Salaries', this.pad, this.height * 0.40 )
-      p5.text('Higher FeMale Salares', this.pad, this.height * 0.60 )
-      p5.fill(50, 150, 255)
-      p5.text('0% Gap', this.pad - 20, this.height * 0.51 )
+        p5.stroke(200);
+        p5.line(
+            this.width / 2, 
+            this.pad, 
+            this.width / 2, 
+            this.height - this.pad); // vertical
+        p5.line(
+            this.pad * 3, 
+            this.height / 2, 
+            this.width - this.pad, 
+            this.height / 2); //horizontal
+        p5.textSize(14) 
+        p5.fill(180);
+        p5.noStroke();
+        p5.text('Higher Male Salaries', this.width / 5, this.height * 0.40 )
+        p5.text('Higher FeMale Salares', this.width / 4.5, this.height * 0.58 )
+        p5.fill(50, 150, 255)
+        p5.text('0% Gap', this.pad * 3, this.height * 0.48)
     };
 
 }

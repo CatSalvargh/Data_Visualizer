@@ -1,20 +1,42 @@
-function PieChart(x, y, diameter) {
+export default class PieChart{
+  constructor (p, sum, sTN) {
+    this.labelSpace = 30;
+    this.sum = sum
+    const p5 = p;
+
+    this.stringsToNumbers = sTN
+  
+  }
+
+  renderPie(p, data, x, y, diameter, labels, colours, title) {
     this.x = x;
     this.y = y;
     this.diameter = diameter;
-    this.labelSpace = 30;
+    this.draw(p, data, labels, colours, title )
+  }
 
-    this.get_radians = function(data) {
-        const total = sum(data);
-        const radians = [];
+  data2 = [25, 25, '50']
+    get_radians(p5, data) {
+      const total = sum(data);
+      const radians = [];
 
-        for (let i = 0; i < data.length; i++) {
-          radians.push((data[i] / total) * TWO_PI);
-        }
-        return radians;
+      function sum(data) {
+          let t = 0 
+          for (let i = 0; i < data.length; i++) {
+            t += parseInt(data[i]);// Ensure that data contains numbers and not strings.
+          }
+          return t;
+      }
+      for (let i = 0; i < data.length; i++) {
+        radians.push((data[i] / total) * p5.TWO_PI);
+      }
+      return radians;
     };
 
-    this.draw = function(data, labels, colours, title) {
+
+  draw(p5, data, labels, colours, title) {
+
+    // console.log(data, labels, colours, title)
         // Test that data is not empty and that each input array is the same length.
       if (data.length == 0) {
         alert('Data has length zero!');
@@ -27,7 +49,7 @@ function PieChart(x, y, diameter) {
 
       // https://p5js.org/examples/form-pie-chart.html
 
-      const angles = this.get_radians(data);
+      const angles = this.get_radians(p5, data);
       let lastAngle = 0;
       let colour;
 
@@ -35,47 +57,47 @@ function PieChart(x, y, diameter) {
         if (colours) {
           colour = colours[i];
         } else {
-          colour = map(i, 0, data.length, 0, 255);
+          colour = p5.map(i, 0, data.length, 0, 255);
         }
 
-        fill(colour);
-        stroke(171, 167, 206);
-        strokeWeight(2);
-        
-        arc(this.x, this.y,
+        p5.fill(colour);
+        p5.stroke(171, 167, 206);
+        p5.strokeWeight(2);
+
+        p5.arc(this.x, this.y,
             this.diameter, this.diameter,
             lastAngle, lastAngle + angles[i] + 0.001); // Hack for 0!
 
 
         if (labels) {
-          this.makeLegendItem(labels[i], i, colour);
+          this.makeLegendItem(p5, labels[i], i, colour);
         }
 
         lastAngle += angles[i];
       }
 
       if (title) {
-        fill(255)
-        noStroke();
-        textAlign('center', 'top');
-        textSize(20);
-        text(title, this.x, this.y - this.diameter * 0.75);
+        p5.fill(255)
+        p5.noStroke();
+        p5.textAlign('center', 'top');
+        p5.textSize(20);
+        p5.text(title, this.x, this.y - this.diameter * 0.75);
       }
     };
 
-    this.makeLegendItem = function(label, i, colour) {
+   makeLegendItem(p5, label, i, colour) {
         const x = this.x + 50 + this.diameter / 2;
         const y = this.y + (this.labelSpace * i) - this.diameter / 3;
         const boxWidth = this.labelSpace / 2;
         const boxHeight = this.labelSpace / 2;
 
-        fill(colour);
-        rect(x, y, boxWidth, boxHeight);
+        p5.fill(colour);
+        p5.rect(x, y, boxWidth, boxHeight);
 
-        fill('lightgrey');
-        noStroke();
-        textAlign('left', 'top');
-        textSize(13);
-        text(label, x + boxWidth + 10, y + boxWidth / 2);
+        p5.fill('lightgrey');
+        p5.noStroke();
+        p5.textAlign('left', 'top');
+        p5.textSize(13);
+        p5.text(label, x + boxWidth + 10, y + boxWidth / 2);
     };
 }
