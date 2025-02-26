@@ -88,29 +88,18 @@ export default class Gallery {
       var visIndex = this.findVisIndex(visId);
 
       if (visIndex != null) {
-        if (this.selectedVisual != null && this.selectedVisual.hasOwnProperty('destroy')) {
+        // if (this.selectedVisual.hasOwnProperty('destroy')) {
                 this.setUpCanvas()
-                this.selectedVisual.destroy();
-        }
+                console.log(this.selectedVisual.destroy())
+                // this.selectedVisual.destroy(p5);
+        // }
         this.selectedVisual = this.visuals[visIndex];
 
         if (this.selectedVisual.hasOwnProperty('setup')) {
-          this.selectedVisual.setup();
+          this.selectedVisual.setup(p5);
         }
 
         p5.loop();
       }
     };
-
-  // setUpCanvas(){
-  //     c = createCanvas(w, h);
-  //     c.id('canvas')
-  //     c.parent('app');
-  //     c.style('position', 'relative');
-  //     c.style('inset', 0);
-  //     c.style('width', 100+'%');
-  //     c.style('height', 100+'%');
-  //     c.style('padding', 10+'px');
-  //     c.style('background', 'rgb(63, 72, 120)');
-  // }
 }

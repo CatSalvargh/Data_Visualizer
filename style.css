@@ -131,9 +131,13 @@
     top: 2rem;
     left: 0;
     inset: 0 0 0 2rem;
-    width: 70px;
+    width: fit-content;
     height: 20px;
     margin: 0 auto;
+ }
+
+ .selectorPieNo {
+    display: none;
  }
 
  /* SVG Map*/
@@ -318,105 +322,3 @@
     inset 5px 5px 10px rgba(255, 255, 255, 0.2),
     inset -5px -5px 10px rgba(255, 255, 255, 0.15);
 }
-
- /* END CONTINENT COMPARISSON*/
-
-
- /* Bar Chart */
- /*Tem no display */
- .barchart-wrapper, .africaSVG {
-    display: none;
- }
- /* .africaSVG {
-     position: absolute;
-     top: 77vh;
-     left: 67vw;
-     height: 54%;
-     animation: go-up 1.2s linear;
-     transform: translateZ(20%);
- }
- 
- .barChartTitle, .barChartP {
-     position: absolute;
-     top: 61vh;
-     left: 62vw;
-     z-index: 1;
- }
- 
- .barChartTitle {
-     position: absolute;
-     top: 58vh;
-     
- }
- 
- @keyframes go-up {
-     0% {
-         top: 90vh
-     }
- }
- 
- .entities {
-     width: 1vw;
-     max-height: 100%;
-     background: var(--accentText);
-     transform: skewY(9deg);
-     position: relative;
-     animation: grow 1.2s linear;
- }
- 
- @keyframes grow {
-     0% {
-         height: 0;
-     }
- }
- 
- .entities::before {
-     content: '';
-     position: absolute;
-     width: 100%;
-     height: 100%;
-     top: -3px;
-     right: -100%;
-     background: darkmagenta;
-     transform: skewY(-18deg);
- }
- 
- .entities::after {
-     content: '';
-     position: absolute;
-     background: #371037;
-     width: 2.2em;
-     height: 1.7em;
-     top: -1.02em;
-     left: 0.15em;
-     transform: rotateX(99deg) rotateY(-7deg) rotateZ(50deg);
- }
- 
- .africa {
-     height: 25%;
- }
- .americas {
-     height: 45%;
- }
- 
- .asia {
-     height: 60%;
- }
- .europe {
-     height: 70%;
- }
- .oceania {
-     height: 75%;
- }
- .global {
-     height: 100%;
- }
- 
- .entities p {
-     color: white;
-     position: absolute;
-     transform: skewY(-9deg);
-     font-size: 1.1rem;
-     top: 2.4rem;
-     left: 0.1em;
- } */

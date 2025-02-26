@@ -1,8 +1,6 @@
-
 import Cluster from './D3-Charts/PopulationCluster.js'
-import { barData, retrieveData } from './D3-Charts/continentComparisson.js'
 import ChartD3 from './D3-Charts/D3-Chart-Constructor.js'
-import { pathName, pathId, eventhandler, selectVisualization } from './svg-Map.js'
+import { pathName, pathId, eventhandler } from './svg-Map.js'
 import  CountryLabel from './D3-Charts/D3-Country-Label-Constructor.js' 
 import AnimatedCircle from './D3-Charts/D3-Circle-Animated-Constructor.js'
 
@@ -31,27 +29,22 @@ window.buttonClick = () => {
     
 }
 
-
-
 function intervalfunc() {
     if(!pathName){
         country = {country: 'World', pathId: 'WD'}
     } else {
         country = {country: pathName, id: pathId}
     }
-
-    console.log('interval running')
     render(country)
-    }
+}
 
 function render(entity) {
     console.log(mapActive)
 
            let selectedCcountry = entity
-            const SecondaryCont = document.querySelector('#continentComparisson')
             const labelcontainer = document.querySelector('#label')
-            const dropdown = ['Global', 'Africa', 'Americas', 'Asia', 'Europe', 'Oceania']
          
+            //Empty the label before re-rendering the next country's barchart
             labelcontainer.innerHTML = '';
 
             d3.json('https://countriesnow.space/api/v0.1/countries/population')

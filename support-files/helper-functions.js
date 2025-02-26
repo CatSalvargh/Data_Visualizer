@@ -1,3 +1,15 @@
+// ============== Preload data
+
+export class Preload {
+  constructor(p5) {
+      const self = this;
+      this.data = p5.loadTable(
+        './data/tech-diversity/race-2018.csv', 'csv', 'header',
+        function() {
+          self.loaded = true;
+      });
+  }
+}
 
 //==============  Data processing helper functions.================
 export function sum(data, stringsToNumbers) {

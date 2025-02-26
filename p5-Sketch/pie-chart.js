@@ -1,43 +1,42 @@
 export default class PieChart{
-  constructor (p, sum, sTN) {
-    this.labelSpace = 30;
-    this.sum = sum
-    const p5 = p;
-
-    this.stringsToNumbers = sTN
+  
+  constructor (sTN) {
+      this.labelSpace = 30;
+      this.stringsToNumbers = sTN //helper function convert strings to numbers
   
   }
 
   renderPie(p, data, x, y, diameter, labels, colours, title) {
-    this.x = x;
-    this.y = y;
-    this.diameter = diameter;
-    this.draw(p, data, labels, colours, title )
+      this.x = x;
+      this.y = y;
+      this.diameter = diameter;
+      this.draw(p, data, labels, colours, title )
   }
 
-  data2 = [25, 25, '50']
-    get_radians(p5, data) {
+  get_radians(p5, data) {
       const total = sum(data);
       const radians = [];
 
       function sum(data) {
-          let t = 0 
-          for (let i = 0; i < data.length; i++) {
-            t += parseInt(data[i]);// Ensure that data contains numbers and not strings.
-          }
-          return t;
+        let t = 0 
+
+        for (let i = 0; i < data.length; i++) {
+          t += parseInt(data[i]);// Ensure that data contains numbers and not strings.
+        }
+
+        return t;
       }
+
       for (let i = 0; i < data.length; i++) {
         radians.push((data[i] / total) * p5.TWO_PI);
       }
+
       return radians;
-    };
+  };
 
 
   draw(p5, data, labels, colours, title) {
-
-    // console.log(data, labels, colours, title)
-        // Test that data is not empty and that each input array is the same length.
+      // Test that data is not empty and that each input array is the same length.
       if (data.length == 0) {
         alert('Data has length zero!');
       } else if (![labels, colours].every((array) => {
@@ -54,6 +53,7 @@ export default class PieChart{
       let colour;
 
       for (let i = 0; i < data.length; i++) {
+        
         if (colours) {
           colour = colours[i];
         } else {
@@ -76,28 +76,32 @@ export default class PieChart{
         lastAngle += angles[i];
       }
 
+      //rect for title overlapping
+      p5.fill(63, 72, 120)
+      p5.rect(0, 0, this.x * 3, 30)
+
       if (title) {
         p5.fill(255)
         p5.noStroke();
         p5.textAlign('center', 'top');
-        p5.textSize(20);
+        p5.textSize(18);
         p5.text(title, this.x, this.y - this.diameter * 0.75);
       }
-    };
+  };
 
    makeLegendItem(p5, label, i, colour) {
-        const x = this.x + 50 + this.diameter / 2;
-        const y = this.y + (this.labelSpace * i) - this.diameter / 3;
-        const boxWidth = this.labelSpace / 2;
-        const boxHeight = this.labelSpace / 2;
+      const x = this.x + 50 + this.diameter / 2;
+      const y = this.y + (this.labelSpace * i) - this.diameter / 3;
+      const boxWidth = this.labelSpace / 2;
+      const boxHeight = this.labelSpace / 2;
 
-        p5.fill(colour);
-        p5.rect(x, y, boxWidth, boxHeight);
+      p5.fill(colour);
+      p5.rect(x, y, boxWidth, boxHeight);
 
-        p5.fill('lightgrey');
-        p5.noStroke();
-        p5.textAlign('left', 'top');
-        p5.textSize(13);
-        p5.text(label, x + boxWidth + 10, y + boxWidth / 2);
+      p5.fill('lightgrey');
+      p5.noStroke();
+      p5.textAlign('left', 'top');
+      p5.textSize(13);
+      p5.text(label, x + boxWidth + 10, y + boxWidth / 2);
     };
 }
