@@ -7,6 +7,8 @@ export default class ChartD3 {
         this.svg = d3.select(this.container).append('svg');
         this.dropdown = dropdownArr
         this.sizeFactor = size
+
+        this.draw();
     }
 
     draw() {
@@ -26,8 +28,10 @@ export default class ChartD3 {
             .attr('y', this.padding * 1.25)
 
         this.plot = svg.append('g')
-                        // .attr('transform',`translate(0, ${this.padding * 0.3 })`);
+                    
         this.generateScales();
+        this.generateAxis();
+        this.drawBars();
     }
 
     generateScales() {    
@@ -81,7 +85,6 @@ export default class ChartD3 {
         const svg = this.svg
         const tooltip = svg.append('g')
                            .attr('id', 'tooltip')
-                        //    .attr('opacity', 0)
                            .attr('id', 'tooltip')
                            .attr('x', (this.padding * 4))
                            .attr('y', (this.padding * 2))

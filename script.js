@@ -1,32 +1,32 @@
 import Cluster from './D3-Charts/PopulationCluster.js'
 import ChartD3 from './D3-Charts/D3-Chart-Constructor.js'
-import { pathName, pathId, eventhandler } from './svg-Map.js'
+import { pathName, pathId, eventhandler } from './support-files/svg-Map.js'
+import { getData } from './support-files/d3-Get-Data.js'
 import  CountryLabel from './D3-Charts/D3-Country-Label-Constructor.js' 
 import AnimatedCircle from './D3-Charts/D3-Circle-Animated-Constructor.js'
 
 let country;
 let interval
-let delay = 1670
 let mapActive = false;
 const map = document.querySelector('.svg-container')
 let countryInfo;
 
-render('global')
+renderMain('global')
 eventhandler()
 
 window.buttonClick = () => {
-    import('./svg-Map.js').then(
-        ({pathName, selectVisualization }) => {
+    // The following dynamic import activates an interval to listen for mouse hovering over the map and get the SVG path ID and name for it to be displayed on the country info label. It clears the interval if the map is not visible.
+    import('./support-files/svg-Map.js').then(
+        ({selectVisualization }) => {
             selectVisualization()
             if (!map.classList.contains('not-visible') && !mapActive) {
-                interval = setInterval(() => {intervalfunc() }, delay)
+                interval = setInterval(() => {intervalfunc() }, 1670)
                 mapActive = true;
             }else {
                 clearInterval(interval)
                 mapActive = !mapActive;
             }
     })
-    
 }
 
 function intervalfunc() {
@@ -35,84 +35,24 @@ function intervalfunc() {
     } else {
         country = {country: pathName, id: pathId}
     }
-    render(country)
+    renderMain(country)
 }
 
-function render(entity) {
-    console.log(mapActive)
+function renderMain(entity) {
+    const labelcontainer = document.querySelector('#label')
+    
+    //Empty the label before re-rendering the next country's barchart
+    labelcontainer.innerHTML = '';
 
-           let selectedCcountry = entity
-            const labelcontainer = document.querySelector('#label')
-         
-            //Empty the label before re-rendering the next country's barchart
-            labelcontainer.innerHTML = '';
+    //Handle the SVG Map and country info display label
+    getData(entity, labelcontainer, ChartD3);
+    countryInfo = new CountryLabel('Country Info', entity.id) 
 
-            d3.json('https://countriesnow.space/api/v0.1/countries/population')
-            .then((d) => {
-                const APIData = d.data
-                let countryData;
-                let globalData;
-                const parseN = (n) => { return  parseFloat((n / 1000000000).toFixed(2))}
-
-                 APIData.forEach((item, i) => {
-                    if (item.country == 'World') {
-                        globalData = item
-                        globalData.domain = 8
-                    }
-               
-                    if(item.country == selectedCcountry.country) {
-                        countryData = item; 
-                    }
-                })  
-                
-                globalData.populationCounts.forEach((g) => {
-                    g.date = g.year
-                    g.value = parseN(g.value)
-                    g.domain = 8
-                })
-
-                countryData.populationCounts.forEach((c, i) => {
-                    c.date = c.year
-                    c.value = parseN(c.value)
-                    c.domain = 1.5
-                })
-
-                const gobalChart = new ChartD3(globalData.populationCounts, labelcontainer, `${globalData.country}'s Population`, 0.50)
-                gobalChart.draw();
-                gobalChart .generateAxis();
-                gobalChart .drawBars();
-                const chart = new ChartD3(countryData.populationCounts, labelcontainer, `${countryData.country}'s Population`, 0.35)
-                chart.draw();
-                chart.generateAxis();
-                chart.drawBars();
-            })
-
-            // ESTO ESTA BIEN, COMENTA Y DESCOMENTALO
-            countryInfo = new CountryLabel('Country Info', entity.id) 
-            countryInfo.draw()
+    //Draw Cluster
+    new Cluster()
 }
 
-new Cluster()
-const circles = new AnimatedCircle()
-
-
-async function getCountryData() {
-    try {
-    const response = await d3.json("./data/data.json")
-    console.log(response)
-
-
-
-
-
-
-
-    } catch(error) {
-            console.error('Something Bad happened:', error.message)
-        }
-
-        
-      //data surce: https://github.com/DovAzencot/ApiCountries/blob/main/data.json
-  }
+//Visualization at the Bottom-right-hand side of the screen
+new AnimatedCircle()
 
 
