@@ -126,6 +126,11 @@
     z-index: 5;
  }
 
+ .selectorPieNo {
+    display: none;
+    opacity: 0;
+ }
+
  .selectorPie {
     position: relative;
     top: 2rem;
@@ -134,10 +139,6 @@
     width: fit-content;
     height: 20px;
     margin: 0 auto;
- }
-
- .selectorPieNo {
-    display: none;
  }
 
  /* SVG Map*/

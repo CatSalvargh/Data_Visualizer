@@ -13,6 +13,22 @@ export default class TechDiversityRace {
       this.colours = ['rgb(108, 143, 239)','rgb(208, 232, 120)', 'rgb(152, 136, 215)', 'rgb(239, 132, 108)', 'rgb(232, 120, 230)','rgb(152, 214, 221)'];
       
       this.preload(p5)
+      this.destroy =  () => {
+        if(this.selector){
+          // const c = document.getElementById('selectorPie')
+          p5.erase();
+            p5.rect(100, 100, 40)
+            this.selector
+          p5.noErase();
+          // // c.style('background:black')
+          // this.selector.style('background-color:transparent')
+          // this.selector.style('color:transparent')
+          // this.selector.style('border:none')
+          // this.selector.remove()
+          // p5.remove()
+          // return
+        }
+       };
   }
 
   preload(p5) {
@@ -30,10 +46,21 @@ export default class TechDiversityRace {
         return;
       }
 
+      // const tooltipDiv = p5.createDiv('p5*js')
+      // tooltipDiv.parent('#app')
+      // tooltipDiv.class('tooltipDiv')
+      // tooltipDiv.style('background', 'red')
+      // tooltipDiv.style('width', '200px')
+      // tooltipDiv.style('height', '50px')
+      // tooltipDiv.style('position', 'absolute')
+      // tooltipDiv.style('top', '0')
+      // tooltipDiv.style('left', '2em')
+     
       //create select and assign options via for loop
       this.selector = p5.createSelect();
       this.selector.parent('canvasWrapper')
       this.selector.class('selectorPie');
+      this.selector.id('selectorPie');
       this.selector.style('background', 'rgba(110, 118, 173, 0.8)');
       this.selector.style('border', '2px solid rgb(171, 167, 206)');
       this.selector.style('font-size', '0.9rem');
@@ -49,7 +76,13 @@ export default class TechDiversityRace {
       p5.noLoop() //stop this.setup from looping, so it continues to this.draw()
   };
 
-  destroy(p) {
+  destroy(p5) {
+    if(this.selector){
+  //  const selector = p5.select('.selectorPie')
+    console.log(selector)
+    this.selector.remove()
+    // this.selector.style('opacity', 0)
+    }
    };
 
   draw(p5) {

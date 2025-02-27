@@ -87,9 +87,9 @@ export default class Gallery {
       var visIndex = this.findVisIndex(visId);
 
       if (visIndex != null) {
-        if (this.selectedVisual.hasOwnProperty('destroy')) {
-                this.setUpCanvas()
+         if (this.selectedVisual != null && Object.hasOwn(this.selectedVisual, 'destroy')) {
                 this.selectedVisual.destroy(p5);
+                this.setUpCanvas();
         }
 
         this.selectedVisual = this.visuals[visIndex];

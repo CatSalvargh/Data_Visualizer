@@ -35,6 +35,7 @@ export default class ChartD3 {
     }
 
     generateScales() {    
+        const formatTime = d3.timeFormat("%Y")
         const data = this.data   
         this.xScale = d3.scaleLinear()
                     .domain([0, data.length -1])
@@ -45,9 +46,9 @@ export default class ChartD3 {
                         .range([0, this.height - this.padding])
            
         this.xAxisScale = d3.scaleTime()
-                    .domain([d3.min(data, (d) => {return d.date}), d3.max(data, (d) => {return d.date})])
+                    .domain([d3.min(data, (d) => {return d.year}), d3.max(data, (d) => {return d.year})])
                     .range([this.padding, this.width - this.padding])
-        
+
         this.yAxisScale = d3.scaleLinear()
                     .domain([0, d3.max(data, (d) => {return d.domain})])     
                     .range([this.height - (2 * this.padding), 0])
@@ -123,7 +124,7 @@ export default class ChartD3 {
             .attr('y', (d) => {return (this.height - this.padding * 1.8) - this.yScale(d.value)})
             .on('mouseover', (e, d) => {
                 tooltip.select('text')
-                        .text(`${(d.date)} - ${d.value} Billion`)
+                        .text(`${(d.year)} - ${d.value} Billion`)
                         .style('font-size', '0.85em')
                         .attr('fill', 'white')
                 
@@ -170,7 +171,7 @@ drawCircles() {
                 const x = e.offsetX
                 const y = e.offsetY
                         tooltip.append('text')
-                        .text(`Global population - ${formatTime(d.date)} - ${d.value} Billion`)
+                        .text(`Global population - ${formatTime(d.year)} - ${d.value} Billion`)
                         .attr('x', x)
                         .attr('y', y)
                         .style('font-size', '0.5em')
@@ -193,7 +194,7 @@ drawCircles() {
                                 .attr('y', (d, i) => {return (d.cy + (i * 10))})
         
     circText.data(data)
-        .text((d) => {return `${formatTime(d.date)}: ${d.value} B`})
+        .text((d) => {return `${formatTime(d.year)}: ${d.value} B`})
         .style('font-size', '10px')
         .style('fill', '#d6e0e1')
     }

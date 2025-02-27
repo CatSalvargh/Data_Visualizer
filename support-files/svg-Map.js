@@ -4,6 +4,7 @@ const dataLabel = document.getElementById('label')
 
 export let pathName; // Global, used by script
 export let pathId; // Global, used by script
+export let mapActive;
 
 export function eventhandler() {paths.forEach(path => {
     path.classList.add('paths') });
@@ -52,7 +53,10 @@ export function selectVisualization() {
       
     if (!map.classList.contains('not-visible')) {
         buttonHtml.innerHTML = 'See zoomable cluster'
+        
     } else {
         buttonHtml.innerHTML = 'See interactive map'     
     }
-  }
+    
+    !mapActive
+}

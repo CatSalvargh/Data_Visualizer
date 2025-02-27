@@ -9,10 +9,10 @@ let country;
 let interval
 let mapActive = false;
 const map = document.querySelector('.svg-container')
-let countryInfo;
+
 
 renderMain('global')
-eventhandler()
+eventhandler() //From svg-Map. It handles mouse events over the map's paths
 
 window.buttonClick = () => {
     // The following dynamic import activates an interval to listen for mouse hovering over the map and get the SVG path ID and name for it to be displayed on the country info label. It clears the interval if the map is not visible.
@@ -26,8 +26,10 @@ window.buttonClick = () => {
                 clearInterval(interval)
                 mapActive = !mapActive;
             }
+            renderMain()
     })
 }
+
 
 function intervalfunc() {
     if(!pathName){
@@ -39,20 +41,25 @@ function intervalfunc() {
 }
 
 function renderMain(entity) {
+    const info = document.querySelectorAll('#countryInfo')
+    //Empty the SVG Map bart chart label before re-rendering the next country's barchart
     const labelcontainer = document.querySelector('#label')
-    
-    //Empty the label before re-rendering the next country's barchart
     labelcontainer.innerHTML = '';
 
-    //Handle the SVG Map and country info display label
+    //Get Data and draw the charts for the SVG Map
     getData(entity, labelcontainer, ChartD3);
-    countryInfo = new CountryLabel('Country Info', entity.id) 
 
-    //Draw Cluster
-    new Cluster()
+    //Draw the country Info label only if the map is visible
+    if (mapActive) {
+        countryInfo = new CountryLabel('Country Info', entity.id) 
+    } else if (!mapActive && info) {
+        info.forEach((item) => item.remove())
+    }
+    
 }
 
 //Visualization at the Bottom-right-hand side of the screen
+new Cluster()
 new AnimatedCircle()
 
 
