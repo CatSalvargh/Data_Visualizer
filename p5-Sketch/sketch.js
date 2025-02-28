@@ -21,17 +21,20 @@ new p5(function(p5){
         gallery = new Gallery(p5, w, h);
         gallery.setUpCanvas(p5);  //The Canvas is created and updated from the gallery
 
-        //The pie chart is the default visualization if no vis is selected
-        const pieConstructor = new PieChart(stN)
-        defaultVis = new TechDiversityRace(p5, stN, w, h, pieConstructor);
+        const pieConstructor = new PieChart(stN) // Instance of Pie chart for the TechDiversityRace
+
+        //Default visualization if no vis is selected
+        defaultVis = new PayGapByJob2017(p5, stN, w, h);
+        // defaultVis = new TechDiversityRace(p5, stN, w, h, pieConstructor);
 
         //Add visualizations to the Gallery (some of them receive helper-functions as parameters)
         gallery.addVisual(defaultVis);
         gallery.addVisual(new WorldPopHistoric(p5, w, h, drawAxis, AxisLabels, xTickLabel, yTickLabel));
         gallery.addVisual(new TechDiversityGender(p5, w, h));
-        gallery.addVisual(new PayGapByJob2017(p5, stN, w, h));
-       
+        // gallery.addVisual(new PayGapByJob2017(p5, stN, w, h));
         gallery.addVisual(new PayGaptimeSeries(p5, w, h, drawAxis, AxisLabels, xTickLabel, yTickLabel));
+        gallery.addVisual(new TechDiversityRace(p5, stN, w, h, pieConstructor));
+       
     };
 
     p5.draw = () =>  { 

@@ -109,10 +109,10 @@ export default class PayGapByJob2017 {
         p5.textSize(14) 
         p5.fill(180);
         p5.noStroke();
-        p5.text('Higher Male Salaries', this.width / 5, this.height * 0.40 )
-        p5.text('Higher FeMale Salares', this.width / 4.5, this.height * 0.58 )
+        p5.text('Higher Male Salaries', this.width * 0.02, this.height * 0.40 )
+        p5.text('Higher FeMale Salares', this.width * 0.025, this.height * 0.58 )
         p5.fill(50, 150, 255)
-        p5.text('0% Gap', this.pad * 3, this.height * 0.48)
+        p5.text('0% Gap', this.pad * 0.2 , this.height * 0.50)
     };
 
 }

@@ -65,8 +65,7 @@ export default class Cluster {
                         .style("font-size", "1rem")
                         .text(d => d.parent === root ? d.data.name : d.data.value ? ` ${d.data.name}:   ${nFormat.format(d.data.value)}` : d.data.name )
                         
-                          
-                // Create the zoom behavior and zoom immediately in to the initial focus node.
+                // Create the zoom behavior and initiate it to the initial focus node.
                 svg.on("click", (e) => zoom(e, root));
                 let focus = root;
                 let view;

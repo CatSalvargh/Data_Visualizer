@@ -1,10 +1,10 @@
 :root {
     --mainBg: rgb(63, 72, 120);
     --accentText: rgb(29, 29, 165);
-    --text:  rgb(154, 168, 209);
-    --accentHover: rgb(219, 212, 66);
+    --text:  rgb(240, 243, 250);
+    --accentHover: rgb(196, 184, 21);
     /* --accentHover: rgba(187, 179, 11); */
-    --accentHoverLight: rgba(187, 179, 11, 0.6);
+    --accentBoxShadowLight: rgba(230, 218, 9, 0.6);
  }
  
  *, *::before, *::after {
@@ -91,12 +91,12 @@
  }
  
  .wrapper, .menu-item, .showName, .showLabel, .labelClicked, .select-map-comp, #countryInfo {
-     box-shadow: -5px 6px 12px var(--accentHoverLight),
+     box-shadow: -5px 6px 12px var(--accentBoxShadowLight),
      5px 5px 20px rgba(0,0,0,0.8),
      inset 5px 5px 10px rgba(255, 255, 255, 0.3),
      inset -5px -5px 10px rgba(255, 255, 255, 0.3);
-     border-left: 2px solid var(--accentHoverLight);
-     border-bottom: 2px solid var(--accentHoverLight);
+     border-left: 2px solid var(--accentBoxShadowLight);
+     border-bottom: 2px solid var(--accentBoxShadowLight);
      background: rgba(50, 50, 80, 0.3);
  }
  
